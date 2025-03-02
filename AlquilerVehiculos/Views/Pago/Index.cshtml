@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 
@@ -49,7 +48,7 @@
 
 
 <button class="p-2 bg-info-subtle text-info-emphasis mt-6 rounded-xl " data-bs-toggle="modal" data-bs-target="#myModal">
-    Guardar Cliente
+    Guardar Pago
 </button>
 
 
@@ -57,65 +56,50 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Cliente</h5>
+                <h5 class="modal-title" id="myModalLabel">Pago</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form class="row g-3 needs-validation" novalidate>
-                    <div class="col-md-6">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" maxlength="100" required>
-                        <div class="valid-feedback">Looks good!</div>
+                     <div class="col-md-4">
+                        <label for="validationCustom02" class="form-label">Monto</label>
+                        <input type="text" class="form-control" id="validationCustom02" required>
+                        
                     </div>
-                    <div class="col-md-6">
-                        <label for="apellido" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" id="apellido" name="apellido" maxlength="100" required>
-                        <div class="valid-feedback">Looks good!</div>
+                    <div class="col-md-4">
+                        <label for="validationCustom02" class="form-label">Metodo de pago</label>
+                        <input type="text" class="form-control" id="validationCustom02" required>
+
                     </div>
-                    <div class="col-md-6">
-                        <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="tel" class="form-control" id="telefono" name="telefono" maxlength="15" required>
-                        <div class="invalid-feedback">Por favor, ingrese un teléfono válido.</div>
+                    <div class="col-md-4">
+                        <label for="validationCustom02" class="form-label">Fecha de pago</label>
+                        <input type="text" class="form-control" id="validationCustom02" required>
+
                     </div>
-                    <div class="col-md-6">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" maxlength="100" required>
-                        <div class="invalid-feedback">Por favor, ingrese un email válido.</div>
+                    <h4>Reserva</h4>
+                    <div class="col-md-4">
+                        <label for="validationCustom02" class="form-label">ID</label>
+                        <input type="text" class="form-control" id="validationCustom02" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="validationCustom02" class="form-label">Inicio</label>
+                        <input type="date" class="form-control" id="validationCustom01">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="validationCustom02" class="form-label">Fin</label>
+                        <input type="date" class="form-control" id="validationCustom02" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="validationCustom02" class="form-label">Estado</label>
+                        <input type="text" class="form-control" id="validationCustom02" required>   
                     </div>
                     <div class="col-12">
                         <button class="btn btn-primary" type="submit" onclick="cerrarModal()">Enviar </button>
                     </div>
-                </form>               
+                </form>
             </div>
         </div>
     </div>
 </div>
 <div id="divTabla">
 </div>
-
-
-<script>
-
-
-    function formatDate(date) {
-        return date.toLocaleDateString("es-ES", { year: 'numeric', month: '2-digit', day: '2-digit' });
-    }
-
-    document.getElementById('myModal').addEventListener('shown.bs.modal', function () {
-          var myCarousel = document.querySelector('#carouselExample');
-
-          var carouselInstance = bootstrap.Carousel.getInstance(myCarousel);
-          if (!carouselInstance) {
-              carouselInstance = new bootstrap.Carousel(myCarousel, { interval: false });
-          }
-          carouselInstance.to(0);
-      });
-
-      function cerrarModal() {
-          const modal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
-          modal.hide();
-      }
-</script>
-
-
-

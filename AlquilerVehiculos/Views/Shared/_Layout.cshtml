@@ -30,20 +30,22 @@
                     <i class="fa-solid fa-briefcase"></i> Administración
                 </a>
                 <ul class="submenu" id="admin-submenu">
-                    <li><a class="lnk-menu" asp-controller="Clientes" asp-action="Index"><i class="fa-solid fa-users"></i> Clientes</a></li>
+                    <li><a class="lnk-menu" asp-controller="Cliente" asp-action="Index"><i class="fa-solid fa-users"></i> Clientes</a></li>
                     <li><a class="lnk-menu" asp-controller="Empleados" asp-action="Index"><i class="fa-solid fa-user-tie"></i> Empleados</a></li>
                     <li><a class="lnk-menu" asp-controller="Pago" asp-action="Index"><i class="fa-solid fa-dollar-sign"></i> Pagos</a></li>
                     <li><a class="lnk-menu" asp-controller="Reservas" asp-action="Index"><i class="fa-solid fa-handshake"></i> Reserva</a></li>
                 </ul>
             </li>
-            <li><a class="lnk-menu" asp-controller="Vehiculos" asp-action="Index"><i class="fa-solid fa-car"></i> Vehículos</a></li>
-            <li><a class="lnk-menu" asp-controller="Alquiler" asp-action="Index"><i class="fa-solid fa-key"></i> Alquiler</a></li>
+            <li><a class="lnka-menu" asp-controller="Vehiculos" asp-action="Index"><i class="fa-solid fa-car"></i> Vehículos</a></li>
+            <li><a class="lnk-menu" asp-controller="Seguros" asp-action="Index"><i class="fa-solid fa-key"></i> Seguro</a></li>
         </ul>
     </nav>
+    <div class="bg-white p-10 rounded-2xl shadow-xl h-screen m-8">
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+    </div>
     </div>
     <footer class="border-top footer text-muted">
         <div class="container">
