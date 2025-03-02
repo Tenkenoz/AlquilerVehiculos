@@ -1,0 +1,36 @@
+[33mcommit cc44c1866ad2854f1da0ca6e6fbf7872cf43293f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Merge: efe8f00 651e84a
+Author: Alexander Ñacato <alexandernacato@gmail.com>
+Date:   Sat Mar 1 18:54:31 2025 -0500
+
+    Guardando cambios antes del merge2
+
+[33mcommit efe8f00625672d4a8c38e81a50316eb5cdc46033[m
+Author: Alexander Ñacato <alexandernacato@gmail.com>
+Date:   Sat Mar 1 17:12:47 2025 -0500
+
+    Guardando cambios antes del merge
+
+[33mcommit 651e84a985255ca8c7a35736ee2fc64129ae5f14[m[33m ([m[1;31morigin/Frontend[m[33m)[m
+Author: Tenkenoz <epobando1@espe.edu.ec>
+Date:   Sat Mar 1 09:51:29 2025 -0500
+
+    Se realizo el panel administrativo de reservas, utilizando bootstrap y tailwind
+
+[33mcommit a49d5fc29386f9eedf20ffcae73d9e4c847f568c[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Alexander Ñacato <alexandernacato@gmail.com>
+Date:   Thu Feb 27 10:05:12 2025 -0500
+
+    Actualizacion
+
+[33mcommit 6dd8d97ffe8905d09e25b5087b9f447af7f0eaf0[m
+Author: Tenkenoz <epobando1@espe.edu.ec>
+Date:   Fri Feb 21 19:48:59 2025 -0500
+
+    Agregar archivos de proyecto.
+
+[33mcommit d8c514fbb325510e61680c2c195e1aa7ea146175[m
+Author: Tenkenoz <epobando1@espe.edu.ec>
+Date:   Fri Feb 21 19:48:56 2025 -0500
+
+    Agregar .gitattributes y .gitignore.
