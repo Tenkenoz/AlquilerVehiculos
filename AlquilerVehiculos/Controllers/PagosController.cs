@@ -3,27 +3,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AlquilerVehiculos.Controllers
 {
-    public class Empleados : Controller
+    public class PagosController : Controller
     {
-        // GET: Empleados
+        // GET: Pago
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Empleados/Details/5
+        // GET: Pago/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Empleados/Create
+        // GET: Pago/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Empleados/Create
+        // POST: Pago/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -38,13 +38,13 @@ namespace AlquilerVehiculos.Controllers
             }
         }
 
-        // GET: Empleados/Edit/5
+        // GET: Pago/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Empleados/Edit/5
+        // POST: Pago/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -59,13 +59,13 @@ namespace AlquilerVehiculos.Controllers
             }
         }
 
-        // GET: Empleados/Delete/5
+        // GET: Pago/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Empleados/Delete/5
+        // POST: Pago/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
