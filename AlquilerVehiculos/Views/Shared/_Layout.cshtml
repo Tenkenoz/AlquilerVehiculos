@@ -12,63 +12,164 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
    <script src="https://cdnjs.cloudflare.com/ajax/libs/datedreamer/0.2.1/datedreamer.min.js"></script>
     <link rel="stylesheet" href="~/tailwindcss/tailwind.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body style="background-color:#DDFFF4">
-    <header>
-        <h1>ALQUILER DE VEICULO</h1>
-        <a id="open-menu" class="toggle-menu" aria-role="button">
-            <i class="fa fa-bars"></i>
-        </a>
-    </header>
-    <nav id="menu">
-        <a id="close-menu" class="toggle-menu" aria-role="button">
-            <i class="fa fa-times"></i>
-        </a>
-        <ul class="lista" style="padding-left: 0px;">
-            <li>
-                <a class="lnk-menu" id="toggle-admin">
-                    <i class="fa-solid fa-briefcase"></i> Administración
-                </a>
-                <ul class="submenu" id="admin-submenu">
-                    <li><a class="lnk-menu" asp-controller="Clientes" asp-action="Index"><i class="fa-solid fa-users"></i> Clientes</a></li>
-                    <li><a class="lnk-menu" asp-controller="Empleados" asp-action="Index"><i class="fa-solid fa-user-tie"></i> Empleados</a></li>
-                    <li><a class="lnk-menu" asp-controller="Pagos" asp-action="Index"><i class="fa-solid fa-dollar-sign"></i> Pagos</a></li>
-                    <li><a class="lnk-menu" asp-controller="Reservas" asp-action="Index"><i class="fa-solid fa-handshake"></i> Reserva</a></li>
+    <div class="contenedor">
+        <div class="sidebar ancho">
+            <div class="logo flex justify-center items-center rounded-xl">
+                <img class="rounded-md" src="https://www.zarla.com/images/zarla-alquila-car-1x1-2400x2400-20220110-xr89q6q4hvkb9bdj3yhc.png?crop=1:1,smart&width=250&dpr=2" width="70px" height="70px" alt="">
+            </div>
+            <nav class="menu-nav">
+                <ul>
+                    <li class="menu-titles" style="padding-top: 0px;">Administración</li>
+
+                    <li class="menu-items">
+                        <a asp-controller="Clientes" asp-action="Index"><i class="fa-solid fa-users menu-nav--icon fa-fw"></i><span>Clientes</span></a>
+                    </li>
+                    <li class="menu-items">
+                        <a asp-controller="Empleados" asp-action="Index"><i class="fa-solid fa-user-tie menu-nav--icon fa-fw"></i><span>Empleados</span></a>
+                    </li>
+                    <li class="menu-items">
+                        <a asp-controller="Pagos" asp-action="Index"><i class="fa-solid fa-dollar-sign menu-nav--icon fa-fw"></i><span>Pagos</span></a>
+                    </li>
+                    <li class="menu-items">
+                        <a asp-controller="Reservas" asp-action="Index"><i class="fa-solid fa-handshake menu-nav--icon fa-fw"></i><span>Reserva</span></a>
+                    </li>
+                    <li class="menu-items">
+                        <a asp-controller="Vehiculos" asp-action="Index"><i class="fa-solid fa-car menu-nav--icon fa-fw"></i><span>Vehículos</span></a>
+                    </li>
+                    <li class="menu-items">
+                        <a asp-controller="Seguros" asp-action="Index"><i class="fa-solid fa-shield-heart menu-nav--icon fa-fw"></i><span>Seguro</span></a>
+                    </li>
+
+                    
                 </ul>
-            </li>
-            <li><a class="lnka-menu" asp-controller="Vehiculos" asp-action="Index"><i class="fa-solid fa-car"></i> Vehículos</a></li>
-            <li><a class="lnk-menu" asp-controller="Seguros" asp-action="Index"><i class="fa-solid fa-key"></i> Seguro</a></li>
-        </ul>
-    </nav>
-    <div class="bg-white p-10 rounded-2xl shadow-xl h-screen m-8">
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-    </div>
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - AlquilerVehiculos - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </nav>
         </div>
-    </footer>
+
+        <div class="main ">
+            <div class="barra fixed">
+                <a class='menu-toggle'><i class="fa fa-bars menu-nav--icon"></i></a>
+            </div>
+            <div class="bg-white p-10 rounded-2xl shadow-xl m-8">
+                <div class="container">
+                    <div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div class="border border-red-500 rounded-xl h-40 flex flex-col justify-between ">
+                                <div class="flex-1 flex items-center justify-center bg-white text-red-700 font-bold">
+                                    <i class="fa-solid fa-users"> 0</i>
+                                </div>
+                                <div class="h-1/5 bg-red-100 text-red-700 text-center p-1 rounded-b-xl">
+                                    CLIENTES
+                                </div>
+                            </div>
+
+
+                            <div class="border border-blue-500 rounded-xl h-40 flex flex-col justify-between  ">
+                                <div class="flex-1 flex items-center justify-center bg-white text-blue-700 font-bold">
+                                    <i class="fa-solid fa-user-tie"> 0</i>
+                                </div>
+                                <div class="h-1/5 bg-blue-100 text-blue-700 text-center p-1 rounded-b-xl">
+                                    EMPLEADOS
+                                </div>
+                            </div>
+
+
+                            <div class="border border-green-500 rounded-xl h-40 flex flex-col justify-between ">
+                                <div class="flex-1 flex items-center justify-center bg-white text-green-700 font-bold">
+                                    <i class="fa-solid fa-dollar-sign"> 0</i>
+                                </div>
+                                <div class="h-1/5 bg-green-100 text-green-700 text-center p-1 rounded-b-xl">
+                                    PAGOS
+                                </div>
+                            </div>
+
+                            <!-- Reservas -->
+                            <div class="border border-yellow-500 rounded-xl h-40 flex flex-col justify-between ">
+                                <div class="flex-1 flex items-center justify-center bg-white text-yellow-700 font-bold">
+                                    <i class="fa-solid fa-handshake"> 0</i>
+                                </div>
+                                <div class="h-1/5 bg-yellow-100 text-yellow-700 text-center p-1 rounded-b-xl">
+                                    RESERVAS
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
+            </div>
+            <footer class="border-top footer text-muted">
+                <div class="container">
+                    &copy; 2025 - AlquilerVehiculos - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+
     <script>
-       
-        document.getElementById('open-menu').addEventListener('click', function () {
-            document.getElementById('menu').classList.add('open');
-             document.getElementById('close-menu').style.display="block"
 
-        });
 
-        document.getElementById('close-menu').addEventListener('click', function () {
-            document.getElementById('menu').classList.remove('open');
-             document.getElementById('close-menu').style.display="none"
-        });
+                jQuery('.menu-toggle').click(function() {
+                  jQuery('.contenedor').toggleClass('ancho-min');
+                  if (window.matchMedia('(min-width: 1017px)').matches) {
+                        /* Changes when we reach the min-width  */
 
-        document.getElementById('toggle-admin').addEventListener('click', function () {
-            const submenu = document.getElementById('admin-submenu');
-            submenu.classList.toggle('open');
-        });
+
+                        } else {
+                        /* Reset for CSS changes – Still need a better way to do this! */
+                      if (!$('.contenedor').hasClass("ancho-min")) {
+                              // $('.main').css('margin-left', '250px');
+                      }
+                      else {
+                        // $('.main').css('margin-left', '70px');
+                      }
+                        }
+
+                });
+
+                jQuery('.menu-boton').click(function() {
+                  jQuery('.menu-nav-seg').toggleClass('open-menu-nav-seg');
+                  jQuery('.menu-boton i').toggleClass('fa-caret-right');
+                  jQuery('.menu-boton i').toggleClass('fa-caret-down');
+                });
+
+                (function($) {
+
+                    /*
+                    * We need to turn it into a function.
+                    * To apply the changes both on document ready and when we resize the browser.
+                    */
+
+                    function mediaSize() {
+                        /* Set the matchMedia  992 + 250*/
+                        if (window.matchMedia('(min-width: 1017px)').matches) {
+                        /* Changes when we reach the min-width  */
+                            jQuery('.contenedor').removeClass('ancho-min');
+                      // $('.sidebar').css('position', 'static');
+                      // $('.main').css('margin-left', '0');
+
+                        } else {
+                        /* Reset for CSS changes – Still need a better way to do this! */
+                            jQuery('.contenedor').addClass('ancho-min');
+                      // $('.sidebar').css('position', 'absolute');
+                      // $('.main').css('margin-left', '70px');
+                        }
+                    };
+
+                    /* Call the function */
+                  mediaSize();
+                  /* Attach the function to the resize event listener */
+                    window.addEventListener('resize', mediaSize, false);
+
+                })(jQuery);
+
+
+
+   
     </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
