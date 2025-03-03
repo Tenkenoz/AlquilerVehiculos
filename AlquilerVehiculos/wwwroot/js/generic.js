@@ -57,6 +57,7 @@ async function fetchPost(url, tipoRespuesta, frm, callback) {
         callback(res);
     } catch (e) {
         console.error("Error en POST:", e.message);  // Añadido para depuración
+        console.log(e)
         alert("Ocurrió un problema en POST");
     }
 }
@@ -201,9 +202,6 @@ function Confirmacion2(titulo = "Confirmación", text = "¿Desea guardar el clie
         }
     });
 }
-
-
-// Función de confirmación antes de eliminar
 function Eliminar(titulo = "Confirmacion", text = "Desea Eliminar ", callaback) {
     Swal.fire({
         title: titulo,
@@ -255,3 +253,7 @@ document.addEventListener("DOMContentLoaded", function () {
    
 });
 
+function cerrarModal() {
+    const modal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
+    modal.hide();
+}

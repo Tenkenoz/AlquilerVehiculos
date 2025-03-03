@@ -4,9 +4,9 @@
 
 function listarVehiculos() {
     objVehiculo = {
-        url: "Vehiculos/ListarVehiculos",
-        cabeceras: ["ID", "Marca", "Modelo", "Año", "Precio", "Estado"],
-        propiedades: ["id", "marca", "modelo", "año", "precio", "estado"],
+        url: "Vehiculos/listarVehiculos",
+        cabeceras: ["ID", "Marca", "Modelo", "Año", "Precio","Estado"],
+        propiedades: ["id", "marca", "modelo", "año", "precio","estado"],
         editar: true,
         eliminar: true,
         propiedadId: "id"
@@ -14,46 +14,45 @@ function listarVehiculos() {
     pintar(objVehiculo);
 }
 
-function limpiarVehiculo() {
-    set("id", "");
+function limpiar() {
     set("marca", "");
     set("modelo", "");
     set("año", "");
-    set("precio", "");
+    set("id", "");
     set("estado", "");
+    set("precio", "");
 }
 
-function EditarVehiculo(id) {
-    var modal = new bootstrap.Modal(document.getElementById('modalVehiculo'));
+function Editar(Id) {
+    var modal = new bootstrap.Modal(document.getElementById('myModal'));
     modal.show();
 
-    fetchGet("Vehiculos/RecuperarVehiculo/?id=" + id, "json", function (data) {
+    fetchGet("Vehiculos/recuperarVehiculo/?id=" + Id, "json", function (data) {
         if (data) {
             set("id", data.id);
             set("marca", data.marca);
             set("modelo", data.modelo);
             set("año", data.año);
-            set("precio", data.precio);
             set("estado", data.estado);
+            set("precio", data.precio);
         } else {
-            console.error("No se encontraron datos para el vehículo con ID " + id);
+            console.error("No se encontraron datos para el vehículo con ID " + Id)
         }
-    });
+});
 }
 
-function GuardarVehiculo(event) {
-    event.preventDefault();
+function GuardarVehiculo() {
     let frmGuardarVehiculo = document.getElementById("frmGuardarVehiculo");
     let frmData = new FormData(frmGuardarVehiculo);
-
     if (get("id") === "") {
         Confirmacion2("Confirmación", "¿Desea guardar este vehículo?", function () {
             fetchPost("Vehiculos/InsertarVehiculo", "text", frmData, function (res) {
                 console.log("Respuesta del servidor:", res);
-                if (res == 1) {
+                if (res == 0) {
                     Bien("Vehículo guardado exitosamente");
                     listarVehiculos();
-                    limpiarVehiculo();
+                    limpiar();
+                    cerrarModal();
                 } else {
                     Errores("No se pudo guardar el vehículo");
                     listarVehiculos();
@@ -67,7 +66,8 @@ function GuardarVehiculo(event) {
                 if (res == 1) {
                     Bien("Vehículo modificado exitosamente");
                     listarVehiculos();
-                    limpiarVehiculo();
+                    limpiar();
+                    cerrarModal();
                 } else {
                     Errores("No se pudo modificar el vehículo");
                     listarVehiculos();
@@ -77,10 +77,11 @@ function GuardarVehiculo(event) {
     }
 }
 
-function eliminarRegistro(id) {
-    fetchGet("Vehiculos/RecuperarVehiculo/?id=" + id, "json", function (data) {
-        Eliminar("Confirmación", "¿Seguro que deseas eliminar el vehículo: " + data.marca + " " + data.modelo + "?", function () {
-            fetchGet("Vehiculos/EliminarVehiculo/?id=" + id, "json", function () {
+function eliminarRegistro(Id) {
+    fetchGet("Vehiculos/recuperarVehiculo/?id=" + Id, "json", function (data) {
+        Eliminar("Confirmación", "¿Seguro que deseas eliminar el vehículo: " + data.Marca + " " + data.Modelo + "?", function () {
+            console.log(data);
+            fetchGet("Vehiculos/EliminarVehiculo/?id=" + Id, "json", function () {
                 listarVehiculos();
             });
         });
@@ -88,16 +89,15 @@ function eliminarRegistro(id) {
 }
 
 async function autoRellenarVehiculo() {
-    const vehiculoId = document.getElementById("validationCustom04").value;
+    const vehiculoId = document.getElementById("validationCustom01").value;
     if (vehiculoId) {
-        fetchGet("Vehiculos/RecuperarVehiculo/?id=" + vehiculoId, "json", function (data) {
+        fetchGet("Vehiculos/recuperarVehiculo/?id=" + vehiculoId, "json", function (data) {
             if (data) {
-                set("validationCustom05", data.marca);
-                set("validationCustom06", data.modelo);
+                set("validationCustom02", data.Marca);
+                set("validationCustom03", data.Modelo);
             } else {
                 limpiarVehiculo();
             }
         });
     }
 }
-
