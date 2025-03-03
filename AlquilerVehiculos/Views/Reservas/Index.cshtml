@@ -17,7 +17,7 @@
                     <div class="carousel-inner">
                         <!-- Primera pestaña -->
                         <div class="carousel-item active">
-                            <form class="row g-3 needs-validation" novalidate>
+                            <form class="row g-3 needs-validation" method="post" novalidate>
                                 <h4>Cliente</h4>
                                 <div class="col-md-4">
                                     <label for="validationCustom01" class="form-label">ID Cliente</label>
@@ -66,17 +66,7 @@
 
                         <!-- Segunda pestaña -->
                         <div class="carousel-item">
-                            <h4>Ingrese la fecha y hora</h4>
-                            <form class="row g-3 needs-validation" novalidate>
-                                <div class="col-md-4">
-                                    <input type="time" class="form-control" id="validationCustom07" required>
-                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="time" class="form-control" id="validationCustom08" required>
-                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
-                                </div>
-                            </form>
+                            <h4>Ingrese la fecha </h4>
                             <div id="my-calendar"></div>
                             <p>Rango seleccionado: <span id="selected-range"></span></p>
                             <button class="btn btn-primary mt-3" onclick="cerrarModal()">
@@ -135,4 +125,7 @@
     
   
 </script>
+
+<script src="~/js/generic.js"></script>
+<script src="~/js/reservas.js"></script>
 

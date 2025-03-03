@@ -1,5 +1,7 @@
 ﻿
 
+
+
 header {
     background: #399;
     padding: 15px;
@@ -9,7 +11,6 @@ header {
 
 .contenedor {
     display: flex;
-   
 }
 
 .main-container {
@@ -120,9 +121,9 @@ li.menu-items {
 
 {
     margin-left: 1rem;
-    }
+}
 
-    }
+}
 
 
 .menu-nav a, .menu-nav .menu-titles {
@@ -134,7 +135,7 @@ li.menu-items {
 
 .menu-nav .menu-titles {
     text-transform: uppercase;
-    }
+}
 
 .menu-nav a:hover, ul.menu-nav-seg .menu-items-seg a:hover {
     color: #EBEBD3;
@@ -153,7 +154,7 @@ ul.menu-nav-seg {
     display: none;
     padding-left: 35px;
 }
-    
+
 ul.open-menu-nav-seg {
     display: block;
 }
@@ -161,14 +162,10 @@ ul.open-menu-nav-seg {
 ul.menu-nav-seg .menu-items-seg a {
     color: #687384;
     padding-top: 9px;
-        display: block;
+    display: block;
     text-decoration: none;
-    }
+}
 
 a.menu-toggle {
     cursor: pointer;
 }
-
-
-
-
