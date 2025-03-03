@@ -49,29 +49,19 @@
 
 
 <button class="p-2 bg-info-subtle text-info-emphasis mt-6 rounded-xl " data-bs-toggle="modal" data-bs-target="#myModal">
-    Guardar Cliente
+    Guardar Empleado
 </button>
-
-
-<h1 class="mb-4 text-center">Tipos de Medicamento</h1>
-<div id="divTable" class="mt-4">
-</div>
-
-<script src="~/js/generic.js"></script>
-<script src="~/js/cliente.js"></script>
 
 
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Cliente</h5>
+                <h5 class="modal-title" id="myModalLabel">Empleado</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="frmGuardarCliente" class="row g-3 needs-validation" novalidate>
-                    <input type="hidden" id="id" name="id">
-
+                <form class="row g-3 needs-validation" novalidate>
                     <div class="col-md-6">
                         <label for="nombre" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" maxlength="100" required>
@@ -93,39 +83,13 @@
                         <div class="invalid-feedback">Por favor, ingrese un email válido.</div>
                     </div>
                     <div class="col-12">
-
-                        <button type="button" id="btnGuardar" onclick="GuardarCliente(event)">Guardar Cliente</button>
+                        <button class="btn btn-primary" type="submit" onclick="cerrarModal()">Enviar </button>
                     </div>
-                </form>               
+                </form>
             </div>
         </div>
     </div>
 </div>
-
-
-
-<script>
-
-
-    function formatDate(date) {
-        return date.toLocaleDateString("es-ES", { year: 'numeric', month: '2-digit', day: '2-digit' });
-    }
-
-    document.getElementById('myModal').addEventListener('shown.bs.modal', function () {
-          var myCarousel = document.querySelector('#carouselExample');
-
-          var carouselInstance = bootstrap.Carousel.getInstance(myCarousel);
-          if (!carouselInstance) {
-              carouselInstance = new bootstrap.Carousel(myCarousel, { interval: false });
-          }
-          carouselInstance.to(0);
-      });
-
-      function cerrarModal() {
-          const modal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
-          modal.hide();
-      }
-</script>
-
-
+<div id="divTabla">
+</div>
 

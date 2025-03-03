@@ -1,56 +1,51 @@
 ﻿@{
     ViewData["Title"] = "Index";
 }
-<div class="bg-white p-10 rounded-2xl shadow-xl h-screen m-8">
+
 <div class="container mx-auto">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="border border-red-500 rounded-xl h-40 flex flex-col justify-between ">
-                <div class="flex-1 flex items-center justify-center bg-white text-red-700 font-bold">
-                    <i class="fa-solid fa-users"> 0</i>  
-                </div>
-                <div class="h-1/5 bg-red-100 text-red-700 text-center p-1 rounded-b-xl">
-                   CLIENTES
-                </div>
+        <div class="border border-red-500 rounded-xl h-40 flex flex-col justify-between ">
+            <div class="flex-1 flex items-center justify-center bg-white text-red-700 font-bold">
+                <i class="fa-solid fa-users"> 0</i>
             </div>
+            <div class="h-1/5 bg-red-100 text-red-700 text-center p-1 rounded-b-xl">
+                CLIENTES
+            </div>
+        </div>
 
-            
-            <div class="border border-blue-500 rounded-xl h-40 flex flex-col justify-between  ">
-                <div class="flex-1 flex items-center justify-center bg-white text-blue-700 font-bold">
-                    <i class="fa-solid fa-user-tie"> 0</i>  
-                </div>
-                <div class="h-1/5 bg-blue-100 text-blue-700 text-center p-1 rounded-b-xl">
-                    EMPLEADOS
-                </div>
+        <div class="border border-blue-500 rounded-xl h-40 flex flex-col justify-between  ">
+            <div class="flex-1 flex items-center justify-center bg-white text-blue-700 font-bold">
+                <i class="fa-solid fa-user-tie"> 0</i>
             </div>
+            <div class="h-1/5 bg-blue-100 text-blue-700 text-center p-1 rounded-b-xl">
+                EMPLEADOS
+            </div>
+        </div>
 
-           
-            <div class="border border-green-500 rounded-xl h-40 flex flex-col justify-between ">
-                <div class="flex-1 flex items-center justify-center bg-white text-green-700 font-bold">
-                    <i class="fa-solid fa-dollar-sign"> 0</i>
-                </div>
-                <div class="h-1/5 bg-green-100 text-green-700 text-center p-1 rounded-b-xl">
-                    PAGOS
-                </div>
+        <div class="border border-green-500 rounded-xl h-40 flex flex-col justify-between ">
+            <div class="flex-1 flex items-center justify-center bg-white text-green-700 font-bold">
+                <i class="fa-solid fa-dollar-sign"> 0</i>
             </div>
+            <div class="h-1/5 bg-green-100 text-green-700 text-center p-1 rounded-b-xl">
+                PAGOS
+            </div>
+        </div>
 
-            <!-- Reservas -->
-            <div class="border border-yellow-500 rounded-xl h-40 flex flex-col justify-between ">
-                <div class="flex-1 flex items-center justify-center bg-white text-yellow-700 font-bold">
-                    <i class="fa-solid fa-handshake"> 0</i>  
-                </div>
-                <div class="h-1/5 bg-yellow-100 text-yellow-700 text-center p-1 rounded-b-xl">
-                    RESERVAS
-                </div>
+        <!-- Reservas -->
+        <div class="border border-yellow-500 rounded-xl h-40 flex flex-col justify-between ">
+            <div class="flex-1 flex items-center justify-center bg-white text-yellow-700 font-bold">
+                <i class="fa-solid fa-handshake"> 0</i>
             </div>
-        
+            <div class="h-1/5 bg-yellow-100 text-yellow-700 text-center p-1 rounded-b-xl">
+                RESERVAS
+            </div>
+        </div>
     </div>
 </div>
 
-
-    <button class="p-2 bg-info-subtle text-info-emphasis mt-6 rounded-xl " data-bs-toggle="modal" data-bs-target="#myModal">
+<button class="p-2 bg-info-subtle text-info-emphasis mt-6 rounded-xl " data-bs-toggle="modal" data-bs-target="#myModal">
     Guardar Reserva
 </button>
-
 
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -64,56 +59,64 @@
                     <div class="carousel-inner">
                         <!-- Primera pestaña -->
                         <div class="carousel-item active">
-
                             <form class="row g-3 needs-validation" novalidate>
                                 <h4>Cliente</h4>
                                 <div class="col-md-4">
-                                    <label for="validationCustom01" class="form-label">ID</label>
-                                    <input type="number" class="form-control" id="validationCustom01">
+                                    <label for="validationCustom01" class="form-label">ID Cliente</label>
+                                    <input type="number" class="form-control" id="validationCustom01" oninput="autoRellenarCliente()" required>
+                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="validationCustom02" class="form-label">Nombre</label>
                                     <input type="text" class="form-control" id="validationCustom02" required>
                                     <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="validationCustomUsername" class="form-label">Apellido</label>
-                                    <input type="text" class="form-control" id="validationCustom02" required>
+                                    <label for="validationCustom03" class="form-label">Apellido</label>
+                                    <input type="text" class="form-control" id="validationCustom03" required>
                                     <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
                                 </div>
-                                <h4>Veiculo</h4>
+
+                                <h4>Vehículo</h4>
                                 <div class="col-md-6">
-                                    <label for="validationCustom01" class="form-label">ID</label>
-                                    <input type="number" class="form-control" id="validationCustom01" >
+                                    <label for="validationCustom04" class="form-label">ID Vehículo</label>
+                                    <input type="number" class="form-control" id="validationCustom04" oninput="autoRellenarVehiculo()" required>
+                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="validationCustom02" class="form-label">Marca</label>
-                                    <input type="text" class="form-control" id="validationCustom02" required>
+                                    <label for="validationCustom05" class="form-label">Marca</label>
+                                    <input type="text" class="form-control" id="validationCustom05" required>
                                     <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="validationCustom02" class="form-label">Modelo</label>
-                                    <input type="text" class="form-control" id="validationCustom02" required>
+                                    <label for="validationCustom06" class="form-label">Modelo</label>
+                                    <input type="text" class="form-control" id="validationCustom06" required>
                                     <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
                                 </div>
-     
+
                                 <div class="col-12">
                                     <button class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="next">
                                         Siguiente
                                     </button>
                                 </div>
                             </form>
-
                         </div>
+
+                        <!-- Segunda pestaña -->
                         <div class="carousel-item">
                             <h4>Ingrese la fecha y hora</h4>
                             <form class="row g-3 needs-validation" novalidate>
                                 <div class="col-md-4">
-                                    <input type="time" class="form-control" id="validationCustom01">
+                                    <input type="time" class="form-control" id="validationCustom07" required>
+                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
                                 </div>
                                 <div class="col-md-4">
-                                    
-                                    <input type="time" class="form-control" id="validationCustom02" required>
+                                    <input type="time" class="form-control" id="validationCustom08" required>
+                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
                                 </div>
                             </form>
                             <div id="my-calendar"></div>
@@ -128,9 +131,14 @@
         </div>
     </div>
 </div>
-<div id="divTabla">
+<h1 class="mb-4 text-center">Tipos de Medicamento</h1>
+<div id="divTable" class="mt-4">
 </div>
-</div>
+
+<script src="~/js/generic.js"></script>
+<script src="~/js/cliente.js"></script>
+<script src="~/js/vehiculos.js"></script>
+
 
 <script>
     const calendar = new datedreamer.range({
@@ -151,20 +159,22 @@
     }
 
     document.getElementById('myModal').addEventListener('shown.bs.modal', function () {
-          var myCarousel = document.querySelector('#carouselExample');
+        var myCarousel = document.querySelector('#carouselExample');
 
-          var carouselInstance = bootstrap.Carousel.getInstance(myCarousel);
-          if (!carouselInstance) {
-              carouselInstance = new bootstrap.Carousel(myCarousel, { interval: false });
-          }
-          carouselInstance.to(0);
-      });
+        var carouselInstance = bootstrap.Carousel.getInstance(myCarousel);
+        if (!carouselInstance) {
+            carouselInstance = new bootstrap.Carousel(myCarousel, { interval: false });
+        }
+        carouselInstance.to(0);
+    });
 
-      function cerrarModal() {
-          const modal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
-          modal.hide();
-      }
+    function cerrarModal() {
+        const modal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
+        modal.hide();
+    }
+
+
+    
+  
 </script>
-
-
 
