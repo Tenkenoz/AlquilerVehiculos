@@ -85,7 +85,7 @@ function eliminarRegistro(id) {
         // Mostramos la confirmación para eliminar
         Eliminar("Confirmación", "¿Seguro que deseas eliminar al cliente: " + data.nombre + " " + data.apellido + "?", function () {
            console.log(data)
-            fetchGet("Cliente/EliminarCliente/?id=" + id, "json", function () {
+            fetchGet("Cliente/EliminarCliente/?id=" + id, "text", function () {
                 listarClientes(); // Actualiza la lista de clientes después de eliminar
             });
         });
