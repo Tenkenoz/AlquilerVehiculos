@@ -23,43 +23,61 @@ function LimpiarDatos(idFormulario) {
 
 async function fetchGet(url, tipoRespuesta, callback) {
     try {
-       
         let urlCompleta = `${window.location.protocol}//${window.location.host}/${url}`;
         console.log(urlCompleta);
 
         let res = await fetch(urlCompleta);
-        if (tipoRespuesta === "json") {
-            res = await res.json();
-        } else if (tipoRespuesta === "text") {
-            res = await res.text();
+        if (!res.ok) {
+            throw new Error('La respuesta del servidor no fue satisfactoria.');
         }
 
-        callback(res);
+        // Verificar si la respuesta tiene contenido antes de intentar convertirla
+        const resText = await res.text(); // Obtener el texto de la respuesta
+        let data;
+        if (resText) {
+            data = tipoRespuesta === "json" ? JSON.parse(resText) : resText;
+        } else {
+            throw new Error('La respuesta del servidor está vacía.');
+        }
+
+        callback(data);
     } catch (e) {
         alert("Ocurrió un problema: " + e.message);
     }
 }
 
+
 async function fetchPost(url, tipoRespuesta, frm, callback) {
+    const urlCompleta = `${window.location.protocol}//${window.location.host}/${url}`;
+    console.log("URL completa:", urlCompleta);  // Depuración
+
     try {
-        let urlCompleta = `${window.location.protocol}//${window.location.host}/${url}`;
-        let res = await fetch(urlCompleta, {
+        const res = await fetch(urlCompleta, {
             method: "POST",
             body: frm
         });
 
-        if (tipoRespuesta === "json") {
-            res = await res.json();
-        } else if (tipoRespuesta === "text") {
-            res = await res.text();
+        if (!res.ok) {
+            throw new Error('La respuesta del servidor no fue satisfactoria.');
         }
 
-        callback(res);
+        const resText = await res.text();  // Obtener el texto de la respuesta
+        let data;
+        if (resText) {
+            data = tipoRespuesta === "json" ? JSON.parse(resText) : resText;
+        } else {
+            throw new Error('La respuesta del servidor está vacía.');
+        }
+
+        console.log("Respuesta del servidor:", data);  // Depuración
+        callback(data);  // Llamar al callback con la respuesta
     } catch (e) {
-        console.error("Error en POST:", e.message);  // Añadido para depuración
+        console.error("Error en POST:", e.message);  // Depuración
         alert("Ocurrió un problema en POST");
+        callback(null);  // Llamar al callback con null en caso de error
     }
 }
+
 
 
 let objConfiguracionGlobal;
@@ -100,8 +118,9 @@ function generarTabla(res) {
     let contenido = "";
     let cabeceras = objConfiguracionGlobal.cabeceras;
     let propiedades = objConfiguracionGlobal.propiedades;
+    contenido += "<div id='tabla-container'>";
     contenido += "<table class='table' id='myTable'>";
-    contenido += "<thead class='table-dark'>";
+    contenido += "<thead>";
     contenido += "<tr>";
 
     for (let i = 0; i < cabeceras.length; i++) {
@@ -146,7 +165,7 @@ function generarTabla(res) {
     </svg> </i>`
             }
 
-            
+
 
             if (objConfiguracionGlobal.eliminar == true) {
                 contenido += `<i onclick="eliminarRegistro(${obj[propiedadID]})" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
@@ -161,6 +180,7 @@ function generarTabla(res) {
 
     contenido += "</tbody>";
     contenido += "</table>";
+    contenido += "</div>";
     return contenido;
 }
 
@@ -201,9 +221,6 @@ function Confirmacion2(titulo = "Confirmación", text = "¿Desea guardar el clie
         }
     });
 }
-
-
-// Función de confirmación antes de eliminar
 function Eliminar(titulo = "Confirmacion", text = "Desea Eliminar ", callaback) {
     Swal.fire({
         title: titulo,
@@ -251,7 +268,11 @@ function Bien(text = "Si se pudo") {
 
 document.addEventListener("DOMContentLoaded", function () {
     let table = document.getElementById("myTable");
-        new DataTable("#myTable", { responsive: true });
-   
+    new DataTable("#myTable", { responsive: true });
+
 });
 
+function cerrarModal() {
+    const modal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
+    modal.hide();
+}

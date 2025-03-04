@@ -2,99 +2,60 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="border border-red-500 rounded-xl h-40 flex flex-col justify-between ">
-            <div class="flex-1 flex items-center justify-center bg-white text-red-700 font-bold">
-                <i class="fa-solid fa-users"> 0</i>
-            </div>
-            <div class="h-1/5 bg-red-100 text-red-700 text-center p-1 rounded-b-xl">
-                CLIENTES
-            </div>
-        </div>
-
-
-        <div class="border border-blue-500 rounded-xl h-40 flex flex-col justify-between  ">
-            <div class="flex-1 flex items-center justify-center bg-white text-blue-700 font-bold">
-                <i class="fa-solid fa-user-tie"> 0</i>
-            </div>
-            <div class="h-1/5 bg-blue-100 text-blue-700 text-center p-1 rounded-b-xl">
-                EMPLEADOS
-            </div>
-        </div>
-
-
-        <div class="border border-green-500 rounded-xl h-40 flex flex-col justify-between ">
-            <div class="flex-1 flex items-center justify-center bg-white text-green-700 font-bold">
-                <i class="fa-solid fa-dollar-sign"> 0</i>
-            </div>
-            <div class="h-1/5 bg-green-100 text-green-700 text-center p-1 rounded-b-xl">
-                PAGOS
-            </div>
-        </div>
-
-        <!-- Reservas -->
-        <div class="border border-yellow-500 rounded-xl h-40 flex flex-col justify-between ">
-            <div class="flex-1 flex items-center justify-center bg-white text-yellow-700 font-bold">
-                <i class="fa-solid fa-handshake"> 0</i>
-            </div>
-            <div class="h-1/5 bg-yellow-100 text-yellow-700 text-center p-1 rounded-b-xl">
-                RESERVAS
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
 <button class="p-2 bg-info-subtle text-info-emphasis mt-6 rounded-xl " data-bs-toggle="modal" data-bs-target="#myModal">
-    Guardar Cliente
+    Guardar Vehículo
 </button>
 
-
-<h1 class="mb-4 text-center">Tipos de Medicamento</h1>
-<div id="divTable" class="mt-4">
-</div>
-
-<script src="~/js/generic.js"></script>
-<script src="~/js/vehiculos.js"></script>
-
-
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Cliente</h5>
+                <h5 class="modal-title" id="modalVehiculoLabel">Vehículo</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="frmGuardarCliente" class="row g-3 needs-validation" novalidate>
+                <form id="frmGuardarVehiculo" class="row g-3 needs-validation" method="POST" novalidate>
+                    <!-- Campo oculto para el ID -->
                     <input type="hidden" id="id" name="id">
 
+                    <!-- Marca -->
                     <div class="col-md-6">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" maxlength="100" required>
+                        <label for="Marca" class="form-label">Marca</label>
+                        <input type="text" class="form-control" id="marca" name="marca" maxlength="50" required>
                         <div class="valid-feedback">Looks good!</div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="apellido" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" id="apellido" name="apellido" maxlength="100" required>
-                        <div class="valid-feedback">Looks good!</div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="tel" class="form-control" id="telefono" name="telefono" maxlength="15" required>
-                        <div class="invalid-feedback">Por favor, ingrese un teléfono válido.</div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" maxlength="100" required>
-                        <div class="invalid-feedback">Por favor, ingrese un email válido.</div>
-                    </div>
-                    <div class="col-12">
 
-                        <button type="button" id="btnGuardar" onclick="GuardarCliente(event)">Guardar Cliente</button>
+                    <!-- Modelo -->
+                    <div class="col-md-6">
+                        <label for="Modelo" class="form-label">Modelo</label>
+                        <input type="text" class="form-control" id="modelo" name="modelo" maxlength="50" required>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+
+                    <!-- Año -->
+                    <div class="col-md-4">
+                        <label for="Año" class="form-label">Año</label>
+                        <input type="number" class="form-control" id="año" name="año" min="1900" max="2099" required>
+                        <div class="invalid-feedback">Ingrese un año válido.</div>
+                    </div>
+
+                    <!-- Precio -->
+                    <div class="col-md-4">
+                        <label for="Precio" class="form-label">Precio</label>
+                        <input type="number" class="form-control" id="precio" name="precio" step="0.01" required>
+                        <div class="invalid-feedback">Ingrese un precio válido.</div>
+                    </div>
+
+                    <!-- Estado -->
+                    <div class="col-md-4">
+                        <label for="Placa" class="form-label">Estado</label>
+                        <input type="text" class="form-control" id="estado" name="estado" required>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+
+                    <!-- Botón Guardar -->
+                    <div class="col-12">
+                        <button type="button" id="btnGuardar" onclick="GuardarVehiculo()">Guardar Vehiculo</button>
                     </div>
                 </form>
             </div>
@@ -103,29 +64,16 @@
 </div>
 
 
+<div id="divTable" class="mt-4"></div>
 
 <script>
-
-
-    function formatDate(date) {
-        return date.toLocaleDateString("es-ES", { year: 'numeric', month: '2-digit', day: '2-digit' });
+    function cerrarModalVehiculo() {
+        const modal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
+        modal.hide();
     }
-
-    document.getElementById('myModal').addEventListener('shown.bs.modal', function () {
-          var myCarousel = document.querySelector('#carouselExample');
-
-          var carouselInstance = bootstrap.Carousel.getInstance(myCarousel);
-          if (!carouselInstance) {
-              carouselInstance = new bootstrap.Carousel(myCarousel, { interval: false });
-          }
-          carouselInstance.to(0);
-      });
-
-      function cerrarModal() {
-          const modal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
-          modal.hide();
-      }
 </script>
 
 
 
+<script src="~/js/generic.js"></script>
+<script src="~/js/vehiculos.js"></script>

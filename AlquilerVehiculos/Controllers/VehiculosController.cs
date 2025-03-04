@@ -7,7 +7,7 @@ namespace AlquilerVehiculos.Controllers
 {
     public class VehiculosController : Controller
     {
-        
+
         public ActionResult Index()
         {
             return View();

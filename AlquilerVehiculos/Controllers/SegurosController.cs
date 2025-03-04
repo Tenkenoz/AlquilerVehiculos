@@ -1,83 +1,53 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using CapaNegocio;
+using CapaEntidad;
+using CapaDatos;
 
 namespace AlquilerVehiculos.Controllers
 {
     public class SegurosController : Controller
     {
-        // GET: SegurosController
+       
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: SegurosController/Details/5
-        public ActionResult Details(int id)
+        public List<SeguroCLS> ListarSeguros()
         {
-            return View();
+            SeguroBL seguroBL = new SeguroBL();
+            return seguroBL.ListarSeguros();
+
         }
 
-        // GET: SegurosController/Create
-        public ActionResult Create()
+        public int InsertarSeguro(SeguroCLS seguro)
         {
-            return View();
+           SeguroBL seguroBL = new SeguroBL();
+            return seguroBL.InsertarSeguro(seguro);
         }
 
-        // POST: SegurosController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public SeguroCLS RecuperarSeguro(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            SeguroBL seguroBL = new SeguroBL();
+            return seguroBL.RecuperarSeguro(id);
         }
 
-        // GET: SegurosController/Edit/5
-        public ActionResult Edit(int id)
+        public int ActualizarSeguro(SeguroCLS seguro)
         {
-            return View();
+            SeguroBL seguroBL = new SeguroBL();
+            return seguroBL.ActualizarSeguro(seguro);
         }
 
-        // POST: SegurosController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public int EliminarSeguro(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            SeguroBL seguroBL = new SeguroBL();
+            return seguroBL.EliminarSeguro(id);
         }
 
-        // GET: SegurosController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: SegurosController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+
+
+
     }
 }

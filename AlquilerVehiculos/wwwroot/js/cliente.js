@@ -48,17 +48,19 @@ function GuardarCliente(event) {
     let frmData = new FormData(frmGuardarCliente);
     if (get("id") === "") {
         Confirmacion2("Confirmación", "¿Desea guardar este cliente?", function () {
-            fetchPost("Cliente/InsertarCliente", "text", frmData, function (res) {
+            fetchPost("Empleados/InsertarEmpleado", "text", frmData, function (res) {
                 console.log("Respuesta del servidor:", res);
-                if (res == 0) {
-                    Bien("Cliente guardado exitosamente");
-                    listarClientes();
+                if (res == "1") { // Ajusta según lo que realmente devuelva tu backend
+                    Bien("Empleado guardado exitosamente");
+                    listarEmpleados();
                     limpiar();
+                    cerrarModal();
                 } else {
-                    Errores("No se pudo guardar el cliente");
-                    listarClientes();
+                    Errores("No se pudo guardar el empleado");
+                    listarEmpleados();
                 }
             });
+
         });
     } else {
         Confirmacion("Confirmación", "¿Desea modificar este cliente?", function () {
@@ -88,20 +90,6 @@ function eliminarRegistro(id) {
             });
         });
     });
-}
-
-async function autoRellenarCliente() {
-    const clienteId = document.getElementById("validationCustom01").value;
-    if (clienteId) {
-        fetchGet("Cliente/recuperarCliente/?id=" + clienteId, "json", function (data) {
-            if (data) {
-                set("validationCustom02", data.nombre);
-                set("validationCustom03", data.apellido);
-            } else {
-                limpiarCliente();
-            }
-        });
-    }
 }
 
 

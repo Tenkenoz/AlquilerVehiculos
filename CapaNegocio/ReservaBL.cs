@@ -1,18 +1,15 @@
-﻿
-using CapaDatos;
+﻿using CapaDatos;
 using CapaEntidad;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace AlquilerVehiculos.Controllers
+namespace CapaNegocio
 {
-    public class ReservasController : Controller
+    class ReservaBL
     {
-
-        public ActionResult Index()
-        {
-            return View();
-        }
         public List<ReservaCLS> ListarReservas()
         {
             ReservaDAL reservasDAL = new ReservaDAL();
@@ -42,6 +39,5 @@ namespace AlquilerVehiculos.Controllers
             ReservaDAL reservasDAL = new ReservaDAL();
             return reservasDAL.EliminarReserva(id);
         }
-
     }
 }
