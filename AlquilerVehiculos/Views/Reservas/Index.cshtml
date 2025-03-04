@@ -1,131 +1,91 @@
 ﻿@{
     ViewData["Title"] = "Index";
 }
-   <button class="p-2 bg-info-subtle text-info-emphasis mt-6 rounded-xl " data-bs-toggle="modal" data-bs-target="#myModal">
+<button class="p-2 bg-info-subtle text-info-emphasis mt-6 rounded-xl" data-bs-toggle="modal" data-bs-target="#myModal">
     Guardar Reserva
 </button>
 
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Reserva</h5>
+                <h5 class="modal-title" id="myModal">Reserva</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="carouselExample" class="carousel slide" data-bs-interval="false">
-                    <div class="carousel-inner">
-                        <!-- Primera pestaña -->
-                        <div class="carousel-item active">
-                            <form class="row g-3 needs-validation" method="post" novalidate>
-                                <h4>Cliente</h4>
-                                <div class="col-md-4">
-                                    <label for="validationCustom01" class="form-label">ID Cliente</label>
-                                    <input type="number" class="form-control" id="validationCustom01" oninput="autoRellenarCliente()" required>
-                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="validationCustom02" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="validationCustom02" required>
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="validationCustom03" class="form-label">Apellido</label>
-                                    <input type="text" class="form-control" id="validationCustom03" required>
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
-                                </div>
+                <form id="frmGuardarReserva" class="row g-3 needs-validation" method="post" novalidate>
+                    <input type="hidden" id="id" name="id">
 
-                                <h4>Vehículo</h4>
-                                <div class="col-md-6">
-                                    <label for="validationCustom04" class="form-label">ID Vehículo</label>
-                                    <input type="number" class="form-control" id="validationCustom04" oninput="autoRellenarVehiculo()" required>
-                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="validationCustom05" class="form-label">Marca</label>
-                                    <input type="text" class="form-control" id="validationCustom05" required>
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="validationCustom06" class="form-label">Modelo</label>
-                                    <input type="text" class="form-control" id="validationCustom06" required>
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
-                                </div>
-
-                                <div class="col-12">
-                                    <button class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="next">
-                                        Siguiente
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-
-                        <!-- Segunda pestaña -->
-                        <div class="carousel-item">
-                            <h4>Ingrese la fecha </h4>
-                            <div id="my-calendar"></div>
-                            <p>Rango seleccionado: <span id="selected-range"></span></p>
-                            <button class="btn btn-primary mt-3" onclick="cerrarModal()">
-                                Finalizar
-                            </button>
-                        </div>
+                    <!-- Datos del Cliente -->
+                    <h4>Cliente</h4>
+                    <div class="col-md-6">
+                        <label for="idCliente" class="form-label">ID Cliente</label>
+                        <input type="number" class="form-control" id="clienteid" name="clienteid" oninput="autoRellenarCliente()" required>
+                        <div class="invalid-feedback">Este campo es obligatorio.</div>
                     </div>
-                </div>
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" maxlength="100" required>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" maxlength="100" readonly>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+
+                    <!-- Datos del Vehículo -->
+                    <h4>Vehículo</h4>
+                    <div class="col-md-6">
+                        <label for="idVehiculo" class="form-label">ID Vehículo</label>
+                        <input type="number" class="form-control" id="vehiculoid" name="vehiculoid" oninput="autoRellenarVehiculo()" required>
+                        <div class="invalid-feedback">Este campo es obligatorio.</div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="marca" class="form-label">Marca</label>
+                        <input type="text" class="form-control" id="marca" name="marca" readonly>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="modelo" class="form-label">Modelo</label>
+                        <input type="text" class="form-control" id="modelo" name="modelo" readonly>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+
+                    <!-- Estado de la Reserva -->
+                    <div class="col-md-6">
+                        <label for="estado" class="form-label">Estado</label>
+                        <input type="text" class="form-control" id="estado" name="estado" required>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+
+                    <!-- Fechas de la Reserva -->
+                    <h4>Ingrese las fechas</h4>
+                    <div class="col-md-6">
+                        <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+                        <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fechaFin" class="form-label">Fecha de Fin</label>
+                        <input type="date" class="form-control" id="fechaFin" name="fechaFin" required>
+                    </div>
+
+                    <!-- Botón de Guardar -->
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="button" onclick="GuardarReserva()">Finalizar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-<h1 class="mb-4 text-center">Tipos de Medicamento</h1>
-<div id="divTable" class="mt-4">
-</div>
 
-<script src="~/js/generic.js"></script>
-<script src="~/js/cliente.js"></script>
-<script src="~/js/vehiculos.js"></script>
-
-
-<script>
-    const calendar = new datedreamer.range({
-        element: "#my-calendar",
-        theme: "lite-purple",
-        onChange: (e) => {
-            if (e.detail.startDate && e.detail.endDate) {
-                const startDate = new Date(e.detail.startDate);
-                const endDate = new Date(e.detail.endDate);
-                document.getElementById("selected-range").innerText =
-                    `Desde: ${formatDate(startDate)} Hasta: ${formatDate(endDate)}`;
-            }
-        }
-    });
-
-    function formatDate(date) {
-        return date.toLocaleDateString("es-ES", { year: 'numeric', month: '2-digit', day: '2-digit' });
-    }
-
-    document.getElementById('myModal').addEventListener('shown.bs.modal', function () {
-        var myCarousel = document.querySelector('#carouselExample');
-
-        var carouselInstance = bootstrap.Carousel.getInstance(myCarousel);
-        if (!carouselInstance) {
-            carouselInstance = new bootstrap.Carousel(myCarousel, { interval: false });
-        }
-        carouselInstance.to(0);
-    });
-
-    function cerrarModal() {
-        const modal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
-        modal.hide();
-    }
-
-
-    
-  
-</script>
+<h1 class="mb-4 text-center">Reservas</h1>
+<div id="divTable" class="mt-4"></div>
 
 <script src="~/js/generic.js"></script>
 <script src="~/js/reservas.js"></script>
+
+
+
 
