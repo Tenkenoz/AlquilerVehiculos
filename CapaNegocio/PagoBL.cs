@@ -1,18 +1,15 @@
 ﻿using CapaDatos;
 using CapaEntidad;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace AlquilerVehiculos.Controllers
+namespace CapaNegocio
 {
-    public class PagosController : Controller
+    class PagoBL
     {
-        // GET: Pago
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         // Listar todos los pagos
         public List<PagoCLS> ListarPagos()
         {

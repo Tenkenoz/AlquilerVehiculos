@@ -26,25 +26,37 @@ function limpiar() {
 }
 
 // Función para editar una reserva
+// Función para editar una reserva
 function Editar(id) {
     const modal = new bootstrap.Modal(document.getElementById('myModal'));
     modal.show();
 
     fetchGet("Reservas/recuperarReserva/?id=" + id, "json", function (data) {
-        if (data) {
+        if (data && data.id) {
             set("id", data.id);
             set("clienteid", data.clienteId);
             set("vehiculoid", data.vehiculoId);
             set("estado", data.estado);
 
-            // Cargar fechas en los inputs de tipo "date"
-            document.getElementById("fechaInicio").value = formatDateToInput(data.fechaInicio);
-            document.getElementById("fechaFin").value = formatDateToInput(data.fechaFin);
+            // Verificar y asignar las fechas correctamente
+            if (data.fechaInicio) {
+                document.getElementById("fechaInicio").value = formatDateToInput(data.fechaInicio);
+            } else {
+                console.warn("Fecha de inicio no disponible");
+            }
+
+            if (data.fechaFin) {
+                document.getElementById("fechaFin").value = formatDateToInput(data.fechaFin);
+            } else {
+                console.warn("Fecha de fin no disponible");
+            }
         } else {
             console.error("No se encontraron datos para la reserva con ID " + id);
+            Errores("No se pudo cargar la reserva. Verifique el ID.");
         }
     });
 }
+
 
 // Función para formatear fecha para los inputs de tipo date
 function formatDateToInput(date) {
@@ -54,6 +66,7 @@ function formatDateToInput(date) {
 
 // Función para guardar una reserva
 function GuardarReserva() {
+
     // Obtener fechas desde los inputs
     const startDate = document.getElementById("fechaInicio").value;
     const endDate = document.getElementById("fechaFin").value;
@@ -90,7 +103,7 @@ function GuardarReserva() {
     } else {
         // Si es una modificación de una reserva existente
         Confirmacion("Confirmación", "¿Desea modificar esta reserva?", function () {
-            fetchPost("Reservas/GuardarCambiosReserva", "text", frmData, function (res) {
+            fetchPost("Reservas/ActualizarReserva", "text", frmData, function (res) {
                 console.log("Respuesta del servidor:", res);
                 if (res == 1) {
                     Bien("Reserva modificada exitosamente");
@@ -107,14 +120,18 @@ function GuardarReserva() {
 
 // Función para eliminar un registro
 function eliminarRegistro(id) {
-    fetchGet("Reservas/EliminarReserva/?id=" + id, "json", function (data) {
-        Eliminar("Confirmación", "¿Seguro que deseas eliminar la reserva con ID: " + data.id + "?", function () {
-            fetchGet("Reserva/EliminarReserva/?id=" + id, "text", function () {
+    Eliminar("Confirmación", "¿Seguro que deseas eliminar la reserva con ID: " + id + "?", function () {
+        fetchGet("Reservas/EliminarReserva/?id=" + id, "text", function (res) {
+            if (res == "1") {
+                Bien("Reserva eliminada exitosamente");
                 listarReservas();
-            });
+            } else {
+                Errores("No se pudo eliminar la reserva");
+            }
         });
     });
 }
+
 
 // Función para auto-rellenar datos del cliente
 async function autoRellenarCliente() {
@@ -173,7 +190,3 @@ function cerrarModal() {
     modal.hide();
 }
 
-// Evento para reiniciar el modal al abrir
-document.getElementById('myModal').addEventListener('shown.bs.modal', function () {
-    limpiar(); // Limpiar campos al abrir el modal para evitar información vieja
-});
