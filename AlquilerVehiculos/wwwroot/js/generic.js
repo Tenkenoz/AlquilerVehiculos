@@ -72,7 +72,12 @@ async function fetchPost(url, tipoRespuesta, frm, callback) {
         console.log("Respuesta del servidor:", data);  // Depuración
         callback(data);  // Llamar al callback con la respuesta
     } catch (e) {
+<<<<<<< HEAD
         console.error("Error en POST:", e.message);  // Depuración
+=======
+        console.error("Error en POST:", e.message);  // Añadido para depuración
+        console.log(e)
+>>>>>>> 5ddcd363148b29cb360c355f3d7e237cf15f24b5
         alert("Ocurrió un problema en POST");
         callback(null);  // Llamar al callback con null en caso de error
     }
@@ -275,4 +280,8 @@ document.addEventListener("DOMContentLoaded", function () {
 function cerrarModal() {
     const modal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
     modal.hide();
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5ddcd363148b29cb360c355f3d7e237cf15f24b5

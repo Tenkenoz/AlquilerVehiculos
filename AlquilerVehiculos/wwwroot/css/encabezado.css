@@ -2,6 +2,8 @@
 
 
 
+
+
 header {
     background: #399;
     padding: 15px;
@@ -169,6 +171,7 @@ ul.menu-nav-seg .menu-items-seg a {
 a.menu-toggle {
     cursor: pointer;
 }
+<<<<<<< HEAD
 
 
 /* 🌞 Tema claro */
@@ -206,3 +209,5 @@ body[data-bs-theme="dark"] #myTable {
         color: white;
         border-color: #495057;
     }
+=======
+>>>>>>> 5ddcd363148b29cb360c355f3d7e237cf15f24b5

@@ -5,8 +5,13 @@
 function listarVehiculos() {
     objVehiculo = {
         url: "Vehiculos/listarVehiculos",
+<<<<<<< HEAD
         cabeceras: ["ID", "Marca", "Modelo", "Año", "Precio", "Estado"],
         propiedades: ["id", "marca", "modelo", "año", "precio", "estado"],
+=======
+        cabeceras: ["ID", "Marca", "Modelo", "Año", "Precio","Estado"],
+        propiedades: ["id", "marca", "modelo", "año", "precio","estado"],
+>>>>>>> 5ddcd363148b29cb360c355f3d7e237cf15f24b5
         editar: true,
         eliminar: true,
         propiedadId: "id"
@@ -38,7 +43,7 @@ function Editar(Id) {
         } else {
             console.error("No se encontraron datos para el vehículo con ID " + Id)
         }
-    });
+});
 }
 
 function GuardarVehiculo() {
@@ -88,3 +93,19 @@ function eliminarRegistro(Id) {
     });
 }
 
+<<<<<<< HEAD
+=======
+async function autoRellenarVehiculo() {
+    const vehiculoId = document.getElementById("validationCustom01").value;
+    if (vehiculoId) {
+        fetchGet("Vehiculos/recuperarVehiculo/?id=" + vehiculoId, "json", function (data) {
+            if (data) {
+                set("validationCustom02", data.Marca);
+                set("validationCustom03", data.Modelo);
+            } else {
+                limpiarVehiculo();
+            }
+        });
+    }
+}
+>>>>>>> 5ddcd363148b29cb360c355f3d7e237cf15f24b5

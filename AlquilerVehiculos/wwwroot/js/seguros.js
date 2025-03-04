@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿
 
 
@@ -38,21 +39,40 @@ function listarSeguros() {
         url: "Seguros/ListarSeguros",
         cabeceras: ["ID", "Tipo de Seguro", "Costo", "Reserva ID"], // Cabeceras que se mostrarán
         propiedades: ["id", "tipoSeguro", "costo", "reservaId"],   // Propiedades que mapean a las cabeceras
+=======
+﻿window.onload = function () {
+    listarSeguros();
+};
+
+function listarSeguros() {
+    objSeguro = {
+        url: "Seguro/listarSeguros",
+        cabeceras: ["ID", "Reserva ID", "Tipo de Seguro", "Costo"],
+        propiedades: ["id", "reservaId", "tipoSeguro", "costo"],
+>>>>>>> 5ddcd363148b29cb360c355f3d7e237cf15f24b5
         editar: true,
         eliminar: true,
         propiedadId: "id"
     };
+<<<<<<< HEAD
     pintar(objSeguro); // Llamada para pintar la tabla con los datos
 }
 
 // Función para limpiar el formulario
 function limpiar() {
     set("id", "");
+=======
+    pintar(objSeguro);
+}
+
+function limpiar() {
+>>>>>>> 5ddcd363148b29cb360c355f3d7e237cf15f24b5
     set("reservaId", "");
     set("tipoSeguro", "");
     set("costo", "");
 }
 
+<<<<<<< HEAD
 // Función para editar un seguro
 function Editar(id) {
     const modal = new bootstrap.Modal(document.getElementById('myModal'));
@@ -66,10 +86,25 @@ function Editar(id) {
             set("reservaId", data.reservaId);  // Asignamos correctamente ReservaId
             set("tipoSeguro", data.tipoSeguro);
             set("costo", data.costo);
+=======
+function Editar(id) {
+    var modal = new bootstrap.Modal(document.getElementById('myModal'));
+    modal.show();
+
+    fetchGet("Seguro/recuperarSeguro/?id=" + id, "json", function (data) {
+        if (data) {
+            set("id", data.id);
+            set("reservaId", data.reservaId);
+            set("tipoSeguro", data.tipoSeguro);
+            set("costo", data.costo);
+        } else {
+            console.error("No se encontraron datos para el seguro con ID " + id);
+>>>>>>> 5ddcd363148b29cb360c355f3d7e237cf15f24b5
         }
     });
 }
 
+<<<<<<< HEAD
 // Función para guardar un seguro
 function GuardarSeguro() {
     const frmGuardarSeguro = document.getElementById("frmGuardarSeguro"); // Usar el ID correcto
@@ -98,12 +133,44 @@ function GuardarSeguro() {
                     listarSeguros();
                     limpiar();
                     cerrarModal();
+=======
+function GuardarSeguro(event) {
+    event.preventDefault();
+    let frmGuardarSeguro = document.getElementById("frmGuardarSeguro");
+    let frmData = new FormData(frmGuardarSeguro);
+    if (get("id") === "") {
+        Confirmacion2("Confirmación", "¿Desea guardar este seguro?", function () {
+            fetchPost("Seguro/InsertarSeguro", "text", frmData, function (res) {
+                console.log("Respuesta del servidor:", res);
+                if (res == 0) {
+                    Bien("Seguro guardado exitosamente");
+                    listarSeguros();
+                    limpiar();
+                } else {
+                    Errores("No se pudo guardar el seguro");
+                    listarSeguros();
+                }
+            });
+        });
+    } else {
+        Confirmacion("Confirmación", "¿Desea modificar este seguro?", function () {
+            fetchPost("Seguro/GuardarCambiosSeguro", "text", frmData, function (res) {
+                console.log("Respuesta del servidor:", res);
+                if (res == 1) {
+                    Bien("Seguro modificado exitosamente");
+                    listarSeguros();
+                    limpiar();
+                } else {
+                    Errores("No se pudo modificar el seguro");
+                    listarSeguros();
+>>>>>>> 5ddcd363148b29cb360c355f3d7e237cf15f24b5
                 }
             });
         });
     }
 }
 
+<<<<<<< HEAD
 
 // Función para cerrar el modal
 function cerrarModal() {
@@ -135,3 +202,29 @@ function get(id) {
 document.getElementById('myModal').addEventListener('shown.bs.modal', function () {
     limpiar();
 });
+=======
+function eliminarRegistro(id) {
+    fetchGet("Seguro/recuperarSeguro/?id=" + id, "json", function (data) {
+        Eliminar("Confirmación", "¿Seguro que deseas eliminar el seguro con ID: " + data.id + "?", function () {
+            fetchGet("Seguro/EliminarSeguro/?id=" + id, "json", function () {
+                listarSeguros();
+            });
+        });
+    });
+}
+
+async function autoRellenarSeguro() {
+    const seguroId = document.getElementById("validationCustom01").value;
+    if (seguroId) {
+        fetchGet("Seguro/recuperarSeguro/?id=" + seguroId, "json", function (data) {
+            if (data) {
+                set("validationCustom02", data.reservaId);
+                set("validationCustom03", data.tipoSeguro);
+                set("validationCustom04", data.costo);
+            } else {
+                limpiarSeguro();
+            }
+        });
+    }
+}
+>>>>>>> 5ddcd363148b29cb360c355f3d7e237cf15f24b5

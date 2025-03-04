@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AlquilerVehiculos.Controllers
 {
-    public class Pago : Controller
+    public class PagosController : Controller
     {
         // GET: Pago
         public ActionResult Index()

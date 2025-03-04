@@ -5,7 +5,7 @@ using CapaNegocio;
 
 namespace AlquilerVehiculos.Controllers
 {
-    public class ClienteController : Controller
+    public class ClientesController : Controller
     {
         
         public ActionResult Index()
@@ -39,5 +39,5 @@ namespace AlquilerVehiculos.Controllers
             ClienteBL clienteBL = new ClienteBL();
             return clienteBL.EliminarCliente(id);
         }
-    }
+      }
 }
