@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,9 +56,9 @@ namespace CapaDatos
                     cn.Open();
                     using (SqlCommand cmd = new SqlCommand("INSERT INTO Seguros (ReservaId, TipoSeguro, Costo) VALUES (@ReservaId, @TipoSeguro, @Costo)", cn))
                     {
-                        cmd.Parameters.AddWithValue("@ReservaId", seguro.ReservaId);
-                        cmd.Parameters.AddWithValue("@TipoSeguro", seguro.TipoSeguro);
-                        cmd.Parameters.AddWithValue("@Costo", seguro.Costo);
+                        cmd.Parameters.Add("@ReservaId", SqlDbType.Int).Value = seguro.ReservaId;
+                        cmd.Parameters.Add("@TipoSeguro", SqlDbType.NVarChar).Value = seguro.TipoSeguro;
+                        cmd.Parameters.Add("@Costo", SqlDbType.Decimal).Value = seguro.Costo;
 
                         int resultado = cmd.ExecuteNonQuery();
                         return resultado;
@@ -70,6 +71,7 @@ namespace CapaDatos
                 return 0;
             }
         }
+
 
         public SeguroCLS RecuperarSeguro(int id)
         {
@@ -106,6 +108,7 @@ namespace CapaDatos
 
             return seguro;
         }
+
 
         public int ActualizarSeguro(SeguroCLS seguro)
         {

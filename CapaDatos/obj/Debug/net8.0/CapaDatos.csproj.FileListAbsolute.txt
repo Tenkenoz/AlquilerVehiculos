@@ -1,0 +1,30 @@
+C:\Users\alexa\Music\Proyecto\AlquilerVehiculos-Auxiliar\CapaDatos\bin\Debug\net8.0\CapaDatos.deps.json
+C:\Users\alexa\Music\Proyecto\AlquilerVehiculos-Auxiliar\CapaDatos\bin\Debug\net8.0\CapaDatos.dll
+C:\Users\alexa\Music\Proyecto\AlquilerVehiculos-Auxiliar\CapaDatos\bin\Debug\net8.0\CapaDatos.pdb
+C:\Users\alexa\Music\Proyecto\AlquilerVehiculos-Auxiliar\CapaDatos\bin\Debug\net8.0\CapaEntidad.dll
+C:\Users\alexa\Music\Proyecto\AlquilerVehiculos-Auxiliar\CapaDatos\bin\Debug\net8.0\CapaEntidad.pdb
+C:\Users\alexa\Music\Proyecto\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\CapaDatos.csproj.AssemblyReference.cache
+C:\Users\alexa\Music\Proyecto\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\CapaDatos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alexa\Music\Proyecto\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\CapaDatos.AssemblyInfoInputs.cache
+C:\Users\alexa\Music\Proyecto\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\CapaDatos.AssemblyInfo.cs
+C:\Users\alexa\Music\Proyecto\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\CapaDatos.csproj.CoreCompileInputs.cache
+C:\Users\alexa\Music\Proyecto\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\CapaDatos.csproj.Up2Date
+C:\Users\alexa\Music\Proyecto\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\CapaDatos.dll
+C:\Users\alexa\Music\Proyecto\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\refint\CapaDatos.dll
+C:\Users\alexa\Music\Proyecto\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\CapaDatos.pdb
+C:\Users\alexa\Music\Proyecto\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\ref\CapaDatos.dll
+C:\Users\pc\OneDrive\Escritorio\OJOO WEEEB\AlquilerVehiculos-Auxiliar\CapaDatos\bin\Debug\net8.0\CapaDatos.deps.json
+C:\Users\pc\OneDrive\Escritorio\OJOO WEEEB\AlquilerVehiculos-Auxiliar\CapaDatos\bin\Debug\net8.0\CapaDatos.dll
+C:\Users\pc\OneDrive\Escritorio\OJOO WEEEB\AlquilerVehiculos-Auxiliar\CapaDatos\bin\Debug\net8.0\CapaDatos.pdb
+C:\Users\pc\OneDrive\Escritorio\OJOO WEEEB\AlquilerVehiculos-Auxiliar\CapaDatos\bin\Debug\net8.0\CapaEntidad.dll
+C:\Users\pc\OneDrive\Escritorio\OJOO WEEEB\AlquilerVehiculos-Auxiliar\CapaDatos\bin\Debug\net8.0\CapaEntidad.pdb
+C:\Users\pc\OneDrive\Escritorio\OJOO WEEEB\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\CapaDatos.csproj.AssemblyReference.cache
+C:\Users\pc\OneDrive\Escritorio\OJOO WEEEB\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\CapaDatos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pc\OneDrive\Escritorio\OJOO WEEEB\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\CapaDatos.AssemblyInfoInputs.cache
+C:\Users\pc\OneDrive\Escritorio\OJOO WEEEB\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\CapaDatos.AssemblyInfo.cs
+C:\Users\pc\OneDrive\Escritorio\OJOO WEEEB\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\CapaDatos.csproj.CoreCompileInputs.cache
+C:\Users\pc\OneDrive\Escritorio\OJOO WEEEB\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\CapaDatos.csproj.Up2Date
+C:\Users\pc\OneDrive\Escritorio\OJOO WEEEB\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\CapaDatos.dll
+C:\Users\pc\OneDrive\Escritorio\OJOO WEEEB\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\refint\CapaDatos.dll
+C:\Users\pc\OneDrive\Escritorio\OJOO WEEEB\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\CapaDatos.pdb
+C:\Users\pc\OneDrive\Escritorio\OJOO WEEEB\AlquilerVehiculos-Auxiliar\CapaDatos\obj\Debug\net8.0\ref\CapaDatos.dll
