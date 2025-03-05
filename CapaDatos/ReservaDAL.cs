@@ -19,7 +19,7 @@ namespace CapaDatos
                 try
                 {
                     cn.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT Id, ClienteId, VehiculosId, FechaInicio, FechaFin, Estado FROM Reservas", cn))
+                    using (SqlCommand cmd = new SqlCommand("SELECT Id, ClienteId, VehiculoId, FechaInicio, FechaFin, Estado FROM Reservas", cn))
                     {
                         SqlDataReader reader = cmd.ExecuteReader();
 
@@ -29,7 +29,7 @@ namespace CapaDatos
                             {
                                 Id = reader.GetInt32(0),
                                 ClienteId = reader.GetInt32(1),
-                                VehiculosId = reader.GetInt32(2),
+                                VehiculoId = reader.GetInt32(2),
                                 FechaInicio = reader.GetDateTime(3),
                                 FechaFin = reader.GetDateTime(4),
                                 Estado = reader.GetString(5)
@@ -55,29 +55,24 @@ namespace CapaDatos
                 using (SqlConnection cn = new SqlConnection(CadenaConexion))
                 {
                     cn.Open();
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO Reservas (ClienteId, VehiculosId, FechaInicio, FechaFin, Estado) VALUES (@ClienteId, @VehiculosId, @FechaInicio, @FechaFin, @Estado)", cn))
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO Reservas (ClienteId, VehiculoId, FechaInicio, FechaFin, Estado) VALUES (@ClienteId, @VehiculoId, @FechaInicio, @FechaFin, @Estado)", cn))
                     {
                         cmd.Parameters.AddWithValue("@ClienteId", reserva.ClienteId);
-                        cmd.Parameters.AddWithValue("@VehiculosId", reserva.VehiculosId);
-                        cmd.Parameters.AddWithValue("@FechaInicio", reserva.FechaInicio);
-                        cmd.Parameters.AddWithValue("@FechaFin", reserva.FechaFin);
+                        cmd.Parameters.AddWithValue("@VehiculoId", reserva.VehiculoId);
+                        cmd.Parameters.AddWithValue("@FechaInicio", reserva.FechaInicio); // Asegúrate de que sea tipo Date
+                        cmd.Parameters.AddWithValue("@FechaFin", reserva.FechaFin); // Asegúrate de que sea tipo Date
                         cmd.Parameters.AddWithValue("@Estado", reserva.Estado);
 
-                        // Depuración
-                        Console.WriteLine($"Insertando reserva con ClienteId: {reserva.ClienteId}, VehiculosId: {reserva.VehiculosId}, FechaInicio: {reserva.FechaInicio}, FechaFin: {reserva.FechaFin}, Estado: {reserva.Estado}");
-
-                        int resultado = cmd.ExecuteNonQuery();
-                        return resultado;
+                        return cmd.ExecuteNonQuery(); // Retorna 1 si la inserción fue exitosa
                     }
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error al insertar reserva: " + ex.Message);
-                return 0;
+                return 0; // Retorna 0 si hubo un error
             }
         }
-
 
 
         public ReservaCLS RecuperarReserva(int id)
@@ -89,7 +84,7 @@ namespace CapaDatos
                 try
                 {
                     cn.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT Id, ClienteId, VehiculosId, FechaInicio, FechaFin, Estado FROM Reservas WHERE Id = @Id", cn))
+                    using (SqlCommand cmd = new SqlCommand("SELECT Id, ClienteId, VehiculoId, FechaInicio, FechaFin, Estado FROM Reservas WHERE Id = @Id", cn))
                     {
                         cmd.Parameters.AddWithValue("@Id", id);
 
@@ -101,7 +96,7 @@ namespace CapaDatos
                             {
                                 Id = reader.GetInt32(0),
                                 ClienteId = reader.GetInt32(1),
-                                VehiculosId = reader.GetInt32(2),
+                                VehiculoId = reader.GetInt32(2),
                                 FechaInicio = reader.GetDateTime(3),
                                 FechaFin = reader.GetDateTime(4),
                                 Estado = reader.GetString(5)
@@ -125,11 +120,11 @@ namespace CapaDatos
                 using (SqlConnection cn = new SqlConnection(CadenaConexion))
                 {
                     cn.Open();
-                    using (SqlCommand cmd = new SqlCommand("UPDATE Reservas SET ClienteId = @ClienteId, VehiculosId = @VehiculosId, FechaInicio = @FechaInicio, FechaFin = @FechaFin, Estado = @Estado WHERE Id = @Id", cn))
+                    using (SqlCommand cmd = new SqlCommand("UPDATE Reservas SET ClienteId = @ClienteId, VehiculoId = @VehiculoId, FechaInicio = @FechaInicio, FechaFin = @FechaFin, Estado = @Estado WHERE Id = @Id", cn))
                     {
                         cmd.Parameters.AddWithValue("@Id", reserva.Id);
                         cmd.Parameters.AddWithValue("@ClienteId", reserva.ClienteId);
-                        cmd.Parameters.AddWithValue("@VehiculosId", reserva.VehiculosId);
+                        cmd.Parameters.AddWithValue("@VehiculoId", reserva.VehiculoId);
                         cmd.Parameters.AddWithValue("@FechaInicio", reserva.FechaInicio);
                         cmd.Parameters.AddWithValue("@FechaFin", reserva.FechaFin);
                         cmd.Parameters.AddWithValue("@Estado", reserva.Estado);
@@ -170,5 +165,7 @@ namespace CapaDatos
 
             return filasAfectadas;
         }
+
     }
+
 }

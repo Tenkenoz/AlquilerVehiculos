@@ -1,22 +1,18 @@
-﻿
-
-
-function formatDateToInput(date) {
+﻿function formatDateToInput(date) {
     const d = new Date(date);
     const year = d.getFullYear();
-    const month = ("0" + (d.getMonth() + 1)).slice(-2); // Asegura que el mes tenga dos dígitos
-    const day = ("0" + d.getDate()).slice(-2); // Asegura que el día tenga dos dígitos
+    const month = ("0" + (d.getMonth() + 1)).slice(-2); // Asegura dos dígitos
+    const day = ("0" + d.getDate()).slice(-2); // Asegura dos dígitos
     return `${year}-${month}-${day}`; // Devuelve la fecha en formato "YYYY-MM-DD"
 }
+
 function autoRellenarReserva() {
     const reservaId = get("reservaId");
-
     if (reservaId) {
         fetchGet(`Reservas/recuperarReserva/?id=${reservaId}`, "json", function (data) {
             if (!data) {
                 console.error("La respuesta del servidor está vacía o mal formada.");
             } else {
-                // Autocompletar los campos si se encuentra la reserva
                 set("fechaInicio", formatDateToInput(data.fechaInicio));
                 set("fechaFin", formatDateToInput(data.fechaFin));
                 set("estado", data.estado);
@@ -25,27 +21,24 @@ function autoRellenarReserva() {
     }
 }
 
-// Agregar el evento de entrada para autocompletar
 document.getElementById("reservaId").addEventListener("input", autoRellenarReserva);
 
 window.onload = function () {
     listarSeguros();
 };
 
-// Función para listar los seguros
 function listarSeguros() {
     const objSeguro = {
         url: "Seguros/ListarSeguros",
-        cabeceras: ["ID", "Tipo de Seguro", "Costo", "Reserva ID"], // Cabeceras que se mostrarán
-        propiedades: ["id", "tipoSeguro", "costo", "reservaId"],   // Propiedades que mapean a las cabeceras
+        cabeceras: ["ID", "Tipo de Seguro", "Costo", "Reserva ID"],
+        propiedades: ["id", "tipoSeguro", "costo", "reservaId"],
         editar: true,
         eliminar: true,
         propiedadId: "id"
     };
-    pintar(objSeguro); // Llamada para pintar la tabla con los datos
+    pintar(objSeguro);
 }
 
-// Función para limpiar el formulario
 function limpiar() {
     set("id", "");
     set("reservaId", "");
@@ -53,7 +46,6 @@ function limpiar() {
     set("costo", "");
 }
 
-// Función para editar un seguro
 function Editar(id) {
     const modal = new bootstrap.Modal(document.getElementById('myModal'));
     modal.show();
@@ -63,21 +55,36 @@ function Editar(id) {
             console.error("La respuesta del servidor está vacía o mal formada.");
         } else {
             set("id", data.id);
-            set("reservaId", data.reservaId);  // Asignamos correctamente ReservaId
-            set("tipoSeguro", data.tipoSeguro);
+            set("reservaId", data.reservaid);
+            set("tipoSeguro", data.tiposeguro);
             set("costo", data.costo);
         }
     });
 }
 
-// Función para guardar un seguro
 function GuardarSeguro() {
-    const frmGuardarSeguro = document.getElementById("frmGuardarSeguro"); // Usar el ID correcto
-    const frmData = new FormData(frmGuardarSeguro);
+    const reservaId = get("reservaId");
+    const tipoSeguro = get("tipoSeguro");
+    const costo = get("costo");
+    const id = get("id");
 
-    if (get("id") === "") {  // Inserción
+    if (!reservaId || !tipoSeguro || !costo) {
+        Errores("Todos los campos son obligatorios.");
+        return;
+    }
+
+    const datosSeguro = {
+        Id: id || null,
+        ReservaId: parseInt(reservaId, 10), // Convertir a entero
+        TipoSeguro: tipoSeguro,
+        Costo: parseInt(costo, 10) // Convertir a entero
+    };
+
+    console.log(datosSeguro);
+
+    if (id === "") {
         Confirmacion2("Confirmación", "¿Desea guardar este seguro?", function () {
-            fetchPost("Seguros/InsertarSeguro", "text", frmData, function (res) {
+            fetchPost("Seguros/InsertarSeguro", "json", datosSeguro, function (res) {
                 if (res == 0) {
                     Errores("No se pudo guardar el seguro. Verifique los datos.");
                 } else {
@@ -88,9 +95,9 @@ function GuardarSeguro() {
                 }
             });
         });
-    } else {  // Actualización
+    } else {
         Confirmacion("Confirmación", "¿Desea modificar este seguro?", function () {
-            fetchPost("Seguros/ActualizarSeguro", "text", frmData, function (res) {
+            fetchPost("Seguros/ActualizarSeguro", "json", datosSeguro, function (res) {
                 if (res == 0) {
                     Errores("No se pudo modificar el seguro. Verifique los datos.");
                 } else {
@@ -104,14 +111,13 @@ function GuardarSeguro() {
     }
 }
 
-
-// Función para cerrar el modal
 function cerrarModal() {
     const modal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
-    modal.hide();
+    if (modal) {
+        modal.hide();
+    }
 }
 
-// Funciones para establecer y obtener valores de los campos
 function set(id, value) {
     const element = document.getElementById(id);
     if (element) {
@@ -131,7 +137,6 @@ function get(id) {
     }
 }
 
-// Limpiar campos al abrir el modal
 document.getElementById('myModal').addEventListener('shown.bs.modal', function () {
     limpiar();
 });

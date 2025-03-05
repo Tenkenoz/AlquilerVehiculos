@@ -24,5 +24,7 @@ namespace CapaDatos
             return root.GetConnectionString("cn");
         }
 
+
+
     }
 }

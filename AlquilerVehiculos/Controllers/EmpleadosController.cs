@@ -30,8 +30,9 @@ namespace AlquilerVehiculos.Controllers
         {
             EmpleadosBL empleadosBL = new EmpleadosBL();
             return empleadosBL.RecuperarEmpleado(id);
-        }
-
+            }
+       
+        
         public int GuardarCambiosEmpleado(EmpleadoCLS obj)
         {
             EmpleadosBL empleadosBL = new EmpleadosBL();
@@ -39,7 +40,7 @@ namespace AlquilerVehiculos.Controllers
         }
 
         public int EliminarEmpleado(int id)
-        {
+            {
             EmpleadosBL empleadosBL = new EmpleadosBL();
             return empleadosBL.EliminarEmpleado(id);
         }

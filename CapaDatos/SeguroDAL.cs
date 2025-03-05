@@ -71,6 +71,7 @@ namespace CapaDatos
             }
         }
 
+
         public SeguroCLS RecuperarSeguro(int id)
         {
             SeguroCLS seguro = null;

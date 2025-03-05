@@ -72,7 +72,8 @@ async function fetchPost(url, tipoRespuesta, frm, callback) {
         console.log("Respuesta del servidor:", data);  // Depuración
         callback(data);  // Llamar al callback con la respuesta
     } catch (e) {
-        console.error("Error en POST:", e.message);  // Depuración
+        console.error("Error en POST:", e.message);  // Añadido para depuración
+        console.log(e)
         alert("Ocurrió un problema en POST");
         callback(null);  // Llamar al callback con null en caso de error
     }
@@ -118,9 +119,8 @@ function generarTabla(res) {
     let contenido = "";
     let cabeceras = objConfiguracionGlobal.cabeceras;
     let propiedades = objConfiguracionGlobal.propiedades;
-    contenido += "<div id='tabla-container'>";
     contenido += "<table class='table' id='myTable'>";
-    contenido += "<thead>";
+    contenido += "<thead class='table-dark'>";
     contenido += "<tr>";
 
     for (let i = 0; i < cabeceras.length; i++) {
@@ -180,7 +180,6 @@ function generarTabla(res) {
 
     contenido += "</tbody>";
     contenido += "</table>";
-    contenido += "</div>";
     return contenido;
 }
 

@@ -7,7 +7,7 @@ function listarReservas() {
     const objReserva = {
         url: "Reservas/listarReservas",
         cabeceras: ["ID", "Cliente ID", "Vehículo ID", "Fecha Inicio", "Fecha Fin", "Estado"],
-        propiedades: ["id", "clienteId", "vehiculosId", "fechaInicio", "fechaFin", "estado"],
+        propiedades: ["id", "clienteId", "vehiculoId", "fechaInicio", "fechaFin", "estado"],
         editar: true,
         eliminar: true,
         propiedadId: "id"
@@ -21,70 +21,77 @@ function limpiar() {
     set("clienteid", "");
     set("vehiculoid", "");
     set("estado", "");
-    set("nombre", "");
-    set("apellido", "");
-    set("marca", "");
-    set("modelo", "");
     document.getElementById("fechaInicio").value = "";
     document.getElementById("fechaFin").value = "";
 }
 
 // Función para editar una reserva
+// Función para editar una reserva
 function Editar(id) {
     const modal = new bootstrap.Modal(document.getElementById('myModal'));
     modal.show();
 
-    fetchGet(`Reservas/recuperarReserva/?id=${id}`, "json", function (data) {
-        if (!data) {
-            console.error("La respuesta del servidor está vacía o mal formada.");
-        } else {
+    fetchGet("Reservas/recuperarReserva/?id=" + id, "json", function (data) {
+        if (data && data.id) {
             set("id", data.id);
             set("clienteid", data.clienteId);
-            set("vehiculoid", data.vehiculosId);
+            set("vehiculoid", data.vehiculoId);
             set("estado", data.estado);
-            document.getElementById("fechaInicio").value = formatDateToInput(data.fechaInicio);
-            document.getElementById("fechaFin").value = formatDateToInput(data.fechaFin);
+
+            // Verificar y asignar las fechas correctamente
+            if (data.fechaInicio) {
+                document.getElementById("fechaInicio").value = formatDateToInput(data.fechaInicio);
+            } else {
+                console.warn("Fecha de inicio no disponible");
+            }
+
+            if (data.fechaFin) {
+                document.getElementById("fechaFin").value = formatDateToInput(data.fechaFin);
+            } else {
+                console.warn("Fecha de fin no disponible");
+            }
+        } else {
+            console.error("No se encontraron datos para la reserva con ID " + id);
+            Errores("No se pudo cargar la reserva. Verifique el ID.");
         }
     });
 }
 
+
+// Función para formatear fecha para los inputs de tipo date
 function formatDateToInput(date) {
     const d = new Date(date);
-    return d.toISOString().split('T')[0];  // Formato YYYY-MM-DD
+    return d.toISOString().split('T')[0]; // Formato: "YYYY-MM-DD"
 }
 
+// Función para guardar una reserva
 function GuardarReserva() {
+
+    // Obtener fechas desde los inputs
     const startDate = document.getElementById("fechaInicio").value;
     const endDate = document.getElementById("fechaFin").value;
 
+    // Verificar si las fechas son válidas
     if (!startDate || !endDate) {
         Errores("Debe seleccionar un rango de fechas.");
         return;
     }
 
-    // Formatear las fechas antes de enviar
-    const formattedStartDate = formatDateToInput(startDate);
-    const formattedEndDate = formatDateToInput(endDate);
-
-    // Asignar las fechas formateadas a los inputs
-    document.getElementById("fechaInicio").value = formattedStartDate;
-    document.getElementById("fechaFin").value = formattedEndDate;
-
     const frmGuardarReserva = document.getElementById("frmGuardarReserva");
     const frmData = new FormData(frmGuardarReserva);
 
-    // Imprimir los datos del formulario para depuración
-    for (let pair of frmData.entries()) {
-        console.log(pair[0] + ": " + pair[1]);
-    }
+    // Añadir las fechas seleccionadas al FormData
+    frmData.append("FechaInicio", startDate);
+    frmData.append("FechaFin", endDate);
 
-    // Verificar si el ID de la reserva está vacío (inserción) o no (actualización)
+    // Verificar si es una inserción o actualización
     if (get("id") === "") {
+        // Si es una nueva reserva
         Confirmacion2("Confirmación", "¿Desea guardar esta reserva?", function () {
             fetchPost("Reservas/InsertarReserva", "text", frmData, function (res) {
                 console.log("Respuesta del servidor:", res);
                 if (res == 0) {
-                    Errores("No se pudo guardar la reserva. Verifique los datos.");
+                    Errores("No se pudo guardar la reserva");
                 } else {
                     Bien("Reserva guardada exitosamente");
                     listarReservas();
@@ -94,28 +101,43 @@ function GuardarReserva() {
             });
         });
     } else {
+        // Si es una modificación de una reserva existente
         Confirmacion("Confirmación", "¿Desea modificar esta reserva?", function () {
             fetchPost("Reservas/ActualizarReserva", "text", frmData, function (res) {
                 console.log("Respuesta del servidor:", res);
-                if (res == 0) {
-                    Errores("No se pudo modificar la reserva. Verifique los datos.");
-                } else {
+                if (res == 1) {
                     Bien("Reserva modificada exitosamente");
                     listarReservas();
                     limpiar();
                     cerrarModal();
+                } else {
+                    Errores("No se pudo modificar la reserva");
                 }
             });
         });
     }
 }
 
+// Función para eliminar un registro
+function eliminarRegistro(id) {
+    Eliminar("Confirmación", "¿Seguro que deseas eliminar la reserva con ID: " + id + "?", function () {
+        fetchGet("Reservas/EliminarReserva/?id=" + id, "text", function (res) {
+            if (res == "1") {
+                Bien("Reserva eliminada exitosamente");
+                listarReservas();
+            } else {
+                Errores("No se pudo eliminar la reserva");
+            }
+        });
+    });
+}
+
 
 // Función para auto-rellenar datos del cliente
 async function autoRellenarCliente() {
-    const clienteId = get("clienteid");
+    const clienteId = document.getElementById("clienteid").value;
     if (clienteId) {
-        fetchGet(`Cliente/recuperarCliente/?id=${clienteId}`, "json", function (data) {
+        fetchGet("Clientes/recuperarCliente/?id=" + clienteId, "json", function (data) {
             if (data) {
                 set("nombre", data.nombre);
                 set("apellido", data.apellido);
@@ -134,13 +156,12 @@ function limpiarCliente() {
 
 // Función para auto-rellenar datos del vehículo
 async function autoRellenarVehiculo() {
-    const vehiculoId = get("vehiculoid");
+    const vehiculoId = document.getElementById("vehiculoid").value;
     if (vehiculoId) {
-        fetchGet(`Vehiculos/recuperarVehiculo/?id=${vehiculoId}`, "json", function (data) {
+        fetchGet("Vehiculos/recuperarVehiculo/?id=" + vehiculoId, "json", function (data) {
             if (data) {
                 set("marca", data.marca);
                 set("modelo", data.modelo);
-                set("estado", data.estado);
             } else {
                 limpiarVehiculo();
             }
@@ -182,7 +203,3 @@ function cerrarModal() {
     modal.hide();
 }
 
-// Limpiar campos al abrir el modal
-document.getElementById('myModal').addEventListener('shown.bs.modal', function () {
-    limpiar();
-});

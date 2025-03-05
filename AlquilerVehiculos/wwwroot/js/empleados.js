@@ -49,7 +49,7 @@ function GuardarEmpleado() {
         Confirmacion2("Confirmación", "¿Desea guardar este empleado?", function () {
             fetchPost("Empleados/InsertarEmpleado", "text", frmData, function (res) {
                 console.log("Respuesta del servidor:", res);
-                if (res == 0) {
+                if (res != 0) {
                     Bien("Empleado guardado exitosamente");
                     listarEmpleados();
                     limpiar();
@@ -95,6 +95,7 @@ async function autoRellenarEmpleado() {
             if (data) {
                 set("validationCustom02", data.nombre);
                 set("validationCustom03", data.apellido);
+                set("validationCustom04", data.cargo);
             } else {
                 limpiarEmpleado();
             }
