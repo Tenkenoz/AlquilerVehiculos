@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<button class="p-2 bg-info-subtle text-info-emphasis mt-6 rounded-xl" data-bs-toggle="modal" data-bs-target="#myModal">
+    Guardar Pago
+</button>
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Pago</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3 needs-validation" id="frmGuardarPago" method="post" novalidate>
+                    <input type="hidden" id="id" name="id">
+                    <div class="col-md-4">
+                        <label for="monto" class="form-label">Monto</label>
+                        <input type="number" class="form-control" id="monto" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="metodoPago" class="form-label">Método de pago</label>
+                        <input type="text" class="form-control" id="metodoPago" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="fechaPago" class="form-label">Fecha de pago</label>
+                        <input type="date" class="form-control" id="fechaPago" required>
+                    </div>
+
+                    <h4>Reserva</h4>
+                    <div class="col-md-4">
+                        <label for="reservaId" class="form-label" >ID Reserva</label>
+                        <input type="text" class="form-control" oninput="recuperarReserva()" id="reservaId">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="fechaInicio" class="form-label">Inicio</label>
+                        <input type="date" class="form-control" id="fechaInicio" disabled>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="fechaFin" class="form-label">Fin</label>
+                        <input type="date" class="form-control" id="fechaFin" disabled>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="estado" class="form-label">Estado</label>
+                        <input type="text" class="form-control" id="estado" disabled>
+                    </div>
+
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit">Enviar</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="divTable"></div>
+
+<script src="~/js/generic.js"></script>
+<script src="~/js/pagos.js"></script>

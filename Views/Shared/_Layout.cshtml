@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AlquilerVehiculos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/AlquilerVehiculos.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/encabezado.css" />
+   
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datedreamer/0.2.1/datedreamer.min.js"></script>
+    <link rel="stylesheet" href="~/tailwindcss/tailwind.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+</head>
+<body style="background-color:#DDFFF4">
+    <button id="btn-tema" class="btn btn-light" style="position: fixed; top: 10px; right: 10px;">
+        <i id="dl-icon" class="bi bi-moon-fill"></i>
+    </button>
+    <div class="contenedor">
+        <div class="sidebar ancho sidebar sticky top-0 h-screen">
+            <div class="logo flex justify-center items-center rounded-xl" style="cursor: pointer;">
+                <img class="rounded-md menu-toggle" src="https://www.zarla.com/images/zarla-alquila-car-1x1-2400x2400-20220110-xr89q6q4hvkb9bdj3yhc.png?crop=1:1,smart&width=250&dpr=2" width="70px" height="70px" alt="">
+            </div>
+            <nav class="menu-nav ">
+                <ul>
+                    <li class="menu-titles" style="padding-top: 0px;">Administración</li>
+
+                    <li class="menu-items">
+                        <a asp-controller="Clientes" asp-action="Index"><i class="fa-solid fa-users menu-nav--icon fa-fw"></i><span>Clientes</span></a>
+                    </li>
+                    <li class="menu-items">
+                        <a asp-controller="Empleados" asp-action="Index"><i class="fa-solid fa-user-tie menu-nav--icon fa-fw"></i><span>Empleados</span></a>
+                    </li>
+                    <li class="menu-items">
+                        <a asp-controller="Pagos" asp-action="Index"><i class="fa-solid fa-dollar-sign menu-nav--icon fa-fw"></i><span>Pagos</span></a>
+                    </li>
+                    <li class="menu-items">
+                        <a asp-controller="Reservas" asp-action="Index"><i class="fa-solid fa-calendar-check menu-nav--icon fa-fw"></i><span>Reservas</span></a>
+                    </li>
+                    <li class="menu-items">
+                        <a asp-controller="Vehiculos" asp-action="Index"><i class="fa-solid fa-car menu-nav--icon fa-fw"></i><span>Vehículos</span></a>
+                    </li>
+                    <li class="menu-items">
+                        <a asp-controller="Seguros" asp-action="Index"><i class="fa-solid fa-shield-heart menu-nav--icon fa-fw"></i><span>Seguro</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+                     
+        <div class="main ">
+            <div class="bg-white p-10 rounded-2xl shadow-xl m-8">
+                <div class="container">
+                    <div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6">
+                            <div class="border border-red-500 rounded-xl h-40 flex flex-col justify-between">
+                                <div class="flex-1 flex items-center justify-center bg-white text-red-700 font-bold">
+                                    <i class="fa-solid fa-users"> <span id="clientesCount">0</span></i>
+                                </div>
+                                <div class="h-1/5 bg-red-100 text-red-700 text-center p-1 rounded-b-xl">
+                                    CLIENTES
+                                </div>
+                            </div>
+
+                            <div class="border border-blue-500 rounded-xl h-40 flex flex-col justify-between">
+                                <div class="flex-1 flex items-center justify-center bg-white text-blue-700 font-bold">
+                                    <i class="fa-solid fa-user-tie"> <span id="empleadosCount">0</span></i>
+                                </div>
+                                <div class="h-1/5 bg-blue-100 text-blue-700 text-center p-1 rounded-b-xl">
+                                    EMPLEADOS
+                                </div>
+                            </div>
+
+                            <div class="border border-green-500 rounded-xl h-40 flex flex-col justify-between">
+                                <div class="flex-1 flex items-center justify-center bg-white text-green-700 font-bold">
+                                    <i class="fa-solid fa-dollar-sign"> <span id="pagosCount">0</span></i>
+                                </div>
+                                <div class="h-1/5 bg-green-100 text-green-700 text-center p-1 rounded-b-xl">
+                                    PAGOS
+                                </div>
+                            </div>
+
+                            <div class="border border-yellow-500 rounded-xl h-40 flex flex-col justify-between">
+                                <div class="flex-1 flex items-center justify-center bg-white text-yellow-700 font-bold">
+                                    <i class="fa-solid fa-calendar-check"> <span id="reservasCount">0</span></i>
+                                </div>
+                                <div class="h-1/5 bg-yellow-100 text-yellow-700 text-center p-1 rounded-b-xl">
+                                    RESERVAS
+                                </div>
+                            </div>
+
+                            <div class="border border-gray-500 rounded-xl h-40 flex flex-col justify-between">
+                                <div class="flex-1 flex items-center justify-center bg-white text-gray-700 font-bold">
+                                    <i class="fa-solid fa-car"> <span id="vehiculosCount">0</span></i>
+                                </div>
+                                <div class="h-1/5 bg-gray-100 text-gray-700 text-center p-1 rounded-b-xl">
+                                    VEHÍCULOS
+                                </div>
+                            </div>
+
+                            <!-- Seguro -->
+                            <div class="border border-purple-500 rounded-xl h-40 flex flex-col justify-between">
+                                <div class="flex-1 flex items-center justify-center bg-white text-purple-700 font-bold">
+                                    <i class="fa-solid fa-shield-alt"> <span id="seguroCount">0</span></i>
+                                </div>
+                                <div class="h-1/5 bg-purple-100 text-purple-700 text-center p-1 rounded-b-xl">
+                                    SEGURO
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
+            </div>
+            
+                        </div>
+                    </div>
+
+
+    <script>
+
+               // Funciones para cambiar el tema
+        const temaOscuro = () => {
+            document.querySelector("body").setAttribute("data-bs-theme", "dark");
+            document.querySelector("#dl-icon").setAttribute("class", "bi bi-sun-fill");
+            localStorage.setItem("tema", "dark"); // Guardar la preferencia
+        };
+
+        const temaClaro = () => {
+            document.querySelector("body").setAttribute("data-bs-theme", "light");
+            document.querySelector("#dl-icon").setAttribute("class", "bi bi-moon-fill");
+            localStorage.setItem("tema", "light"); // Guardar la preferencia
+        };
+
+        const cambiarTema = () => {
+            document.querySelector("body").getAttribute("data-bs-theme") === "light" ? temaOscuro() : temaClaro();
+        };
+
+        // Aplicar el tema guardado en localStorage al cargar la página
+        document.addEventListener("DOMContentLoaded", () => {
+            const temaGuardado = localStorage.getItem("tema") || "light";
+            temaGuardado === "dark" ? temaOscuro() : temaClaro();
+        });
+
+        // Asignar evento al botón
+        document.querySelector("#btn-tema").addEventListener("click", cambiarTema);
+                      
+
+
+
+
+
+        jQuery('.menu-toggle').click(function() {
+          jQuery('.contenedor').toggleClass('ancho-min');
+          if (window.matchMedia('(min-width: 1017px)').matches) {
+                /* Changes when we reach the min-width  */
+
+
+                } else {
+                /* Reset for CSS changes – Still need a better way to do this! */
+              if (!$('.contenedor').hasClass("ancho-min")) {
+                      // $('.main').css('margin-left', '250px');
+              }
+              else {
+                // $('.main').css('margin-left', '70px');
+              }
+                }
+
+        });
+
+        jQuery('.menu-boton').click(function() {
+          jQuery('.menu-nav-seg').toggleClass('open-menu-nav-seg');
+          jQuery('.menu-boton i').toggleClass('fa-caret-right');
+          jQuery('.menu-boton i').toggleClass('fa-caret-down');
+        });
+
+        (function($) {
+
+            /*
+            * We need to turn it into a function.
+            * To apply the changes both on document ready and when we resize the browser.
+            */
+
+            function mediaSize() {
+                /* Set the matchMedia  992 + 250*/
+                if (window.matchMedia('(min-width: 1017px)').matches) {
+                /* Changes when we reach the min-width  */
+                    jQuery('.contenedor').removeClass('ancho-min');
+              // $('.sidebar').css('position', 'static');
+              // $('.main').css('margin-left', '0');
+
+                } else {
+                /* Reset for CSS changes – Still need a better way to do this! */
+                    jQuery('.contenedor').addClass('ancho-min');
+              // $('.sidebar').css('position', 'absolute');
+              // $('.main').css('margin-left', '70px');
+                }
+            };
+
+            /* Call the function */
+          mediaSize();
+          /* Attach the function to the resize event listener */
+            window.addEventListener('resize', mediaSize, false);
+
+        })(jQuery);
+
+
+
+
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+        });
+      
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

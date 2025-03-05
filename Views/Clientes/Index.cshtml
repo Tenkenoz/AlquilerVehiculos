@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<button class="p-2 bg-info-subtle text-info-emphasis mt-6 rounded-xl " data-bs-toggle="modal" data-bs-target="#myModal">
+    Guardar Cliente
+</button>
+
+
+<h1 class="mb-4 text-center">Tipos de Medicamento</h1>
+<div id="divTable" class="mt-4">
+</div>
+
+<script src="~/js/generic.js"></script>
+<script src="~/js/cliente.js"></script>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Cliente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="frmGuardarCliente" class="row g-3 needs-validation"  novalidate>
+                    <input type="hidden" id="id" name="id">
+
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" maxlength="100" required>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" maxlength="100" required>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="tel" class="form-control" id="telefono" name="telefono" maxlength="15" required>
+                        <div class="invalid-feedback">Por favor, ingrese un teléfono válido.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" maxlength="100" required>
+                        <div class="invalid-feedback">Por favor, ingrese un email válido.</div>
+                    </div>
+                    <div class="col-12">
+
+                        <button type="button" id="btnGuardar" onclick="GuardarCliente()">Guardar Cliente</button>
+                    </div>
+                </form>               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+<button class="p-2 bg-info-subtle text-info-emphasis mt-6 rounded-xl " data-bs-toggle="modal" data-bs-target="#myModal">
+    Guardar Seguro
+</button>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Seguro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="frmGuardarSeguro" class="row g-3 needs-validation" method="post" novalidate>
+                    <div class="col-md-4">
+                        <label for="id" class="form-label">ID</label>
+                        <input type="text" class="form-control" id="id" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="tipoSeguro" class="form-label">Tipo</label>
+                        <input type="text" class="form-control" id="tipoSeguro" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="costo" class="form-label">Costo</label>
+                        <input type="number" class="form-control" id="costo" required>
+                    </div>
+
+                    <h4>Reserva</h4>
+                    <!-- Formulario de Reserva -->
+                    <div class="col-md-4">
+                        <label for="reservaId" class="form-label">ID</label>
+                        <input type="number" class="form-control" id="reservaId" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="fechaInicio" class="form-label">Inicio</label>
+                        <input type="date" class="form-control" id="fechaInicio" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="fechaFin" class="form-label">Fin</label>
+                        <input type="date" class="form-control" id="fechaFin" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="estado" class="form-label">Estado</label>
+                        <input type="text" class="form-control" id="estado" required>
+                    </div>
+
+                    <div class="col-12 mt-4">
+                        <button class="btn btn-primary" type="button" onclick="GuardarSeguro()">Finalizar</button>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<h1 class="mb-4 text-center">Seguros</h1>
+<div id="divTable" class="mt-4"></div>
+
+<script src="~/js/generic.js"></script>
+<script src="~/js/seguros.js"></script>
+

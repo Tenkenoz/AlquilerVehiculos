@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+<button class="p-2 bg-info-subtle text-info-emphasis mt-6 rounded-xl" data-bs-toggle="modal" data-bs-target="#myModal">
+    Guardar Reserva
+</button>
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModal">Reserva</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="frmGuardarReserva" class="row g-3 needs-validation" method="post" novalidate>
+                    <input type="hidden" id="id" name="id">
+
+                    <!-- Datos del Cliente -->
+                    <h4>Cliente</h4>
+                    <div class="col-md-6">
+                        <label for="idCliente" class="form-label">ID Cliente</label>
+                        <input type="number" class="form-control" id="clienteid" name="clienteid" oninput="autoRellenarCliente()" required>
+                        <div class="invalid-feedback">Este campo es obligatorio.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" maxlength="100" required>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" maxlength="100" readonly>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+
+                    <!-- Datos del Vehículo -->
+                    <h4>Vehículo</h4>
+                    <div class="col-md-6">
+                        <label for="idVehiculo" class="form-label">ID Vehículo</label>
+                        <input type="number" class="form-control" id="vehiculoid" name="vehiculoid" oninput="autoRellenarVehiculo()" required>
+                        <div class="invalid-feedback">Este campo es obligatorio.</div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="marca" class="form-label">Marca</label>
+                        <input type="text" class="form-control" id="marca" name="marca" readonly>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="modelo" class="form-label">Modelo</label>
+                        <input type="text" class="form-control" id="modelo" name="modelo" readonly>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+
+                    <!-- Estado de la Reserva -->
+                    <div class="col-md-6">
+                        <label for="estado" class="form-label">Estado</label>
+                        <input type="text" class="form-control" id="estado" name="estado" required>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+
+                    <!-- Fechas de la Reserva -->
+                    <h4>Ingrese las fechas</h4>
+                    <div class="col-md-6">
+                        <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+                        <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fechaFin" class="form-label">Fecha de Fin</label>
+                        <input type="date" class="form-control" id="fechaFin" name="fechaFin" required>
+                    </div>
+
+                    <!-- Botón de Guardar -->
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="button" onclick="GuardarReserva()">Finalizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1 class="mb-4 text-center">Reservas</h1>
+<div id="divTable" class="mt-4"></div>
+
+<script src="~/js/generic.js"></script>
+<script src="~/js/reservas.js"></script>
+
+
+
+
