@@ -5,13 +5,8 @@
 function listarVehiculos() {
     objVehiculo = {
         url: "Vehiculos/listarVehiculos",
-<<<<<<< HEAD
-        cabeceras: ["ID", "Marca", "Modelo", "Año", "Precio", "Estado"],
-        propiedades: ["id", "marca", "modelo", "año", "precio", "estado"],
-=======
         cabeceras: ["ID", "Marca", "Modelo", "Año", "Precio","Estado"],
         propiedades: ["id", "marca", "modelo", "año", "precio","estado"],
->>>>>>> 5ddcd363148b29cb360c355f3d7e237cf15f24b5
         editar: true,
         eliminar: true,
         propiedadId: "id"
@@ -53,7 +48,7 @@ function GuardarVehiculo() {
         Confirmacion2("Confirmación", "¿Desea guardar este vehículo?", function () {
             fetchPost("Vehiculos/InsertarVehiculo", "text", frmData, function (res) {
                 console.log("Respuesta del servidor:", res);
-                if (res == 0) {
+                if (res != 0) {
                     Bien("Vehículo guardado exitosamente");
                     listarVehiculos();
                     limpiar();
@@ -93,8 +88,6 @@ function eliminarRegistro(Id) {
     });
 }
 
-<<<<<<< HEAD
-=======
 async function autoRellenarVehiculo() {
     const vehiculoId = document.getElementById("validationCustom01").value;
     if (vehiculoId) {
@@ -108,4 +101,3 @@ async function autoRellenarVehiculo() {
         });
     }
 }
->>>>>>> 5ddcd363148b29cb360c355f3d7e237cf15f24b5

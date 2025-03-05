@@ -21,11 +21,13 @@ namespace AlquilerVehiculos.Controllers
 
         }
 
-        public int InsertarSeguro(SeguroCLS seguro)
+        [HttpPost]
+        public int InsertarSeguro([FromBody] SeguroCLS seguro)
         {
-           SeguroBL seguroBL = new SeguroBL();
-            return seguroBL.InsertarSeguro(seguro);
+            SeguroBL seguroBL = new SeguroBL();
+            return seguroBL.InsertarSeguro(seguro);  // Verifica que el valor retornado por este método no sea 0
         }
+
 
         public SeguroCLS RecuperarSeguro(int id)
         {

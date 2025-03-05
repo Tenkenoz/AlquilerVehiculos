@@ -40,8 +40,4 @@ namespace CapaNegocio
             return reservasDAL.EliminarReserva(id);
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 5ddcd363148b29cb360c355f3d7e237cf15f24b5

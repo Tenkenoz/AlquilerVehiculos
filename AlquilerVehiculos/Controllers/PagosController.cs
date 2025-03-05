@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CapaDatos;
+using CapaEntidad;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlquilerVehiculos.Controllers
@@ -11,73 +13,39 @@ namespace AlquilerVehiculos.Controllers
             return View();
         }
 
-        // GET: Pago/Details/5
-        public ActionResult Details(int id)
+        // Listar todos los pagos
+        public List<PagoCLS> ListarPagos()
         {
-            return View();
+            PagoDAL pagosDAL = new PagoDAL();
+            return pagosDAL.ListarPagos();
         }
 
-        // GET: Pago/Create
-        public ActionResult Create()
+        // Insertar un nuevo pago
+        public int InsertarPago(PagoCLS pago)
         {
-            return View();
+            PagoDAL pagosDAL = new PagoDAL();
+            return pagosDAL.InsertarPago(pago);
         }
 
-        // POST: Pago/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        // Recuperar un pago por ID
+        public PagoCLS RecuperarPago(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            PagoDAL pagosDAL = new PagoDAL();
+            return pagosDAL.RecuperarPago(id);
         }
 
-        // GET: Pago/Edit/5
-        public ActionResult Edit(int id)
+        // Actualizar un pago existente
+        public int ActualizarPago(PagoCLS pago)
         {
-            return View();
+            PagoDAL pagosDAL = new PagoDAL();
+            return pagosDAL.ActualizarPago(pago);
         }
 
-        // POST: Pago/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        // Eliminar un pago por ID
+        public int EliminarPago(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Pago/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Pago/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            PagoDAL pagosDAL = new PagoDAL();
+            return pagosDAL.EliminarPago(id);
         }
     }
 }
